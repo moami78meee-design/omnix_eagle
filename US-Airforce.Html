@@ -1,0 +1,1217 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>US Military | Air Force Arsenal</title>
+<meta name="description" content="Showcase of US Air Force airpower — fighters, drones, and missiles. Bilingual (English & فارسی)." />
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><text y='20' font-size='20'>⭐</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;700;900&family=Inter:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --bg:#060a13; --bg2:#0a1120;
+  --border:rgba(255,255,255,.11); --border-soft:rgba(255,255,255,.07);
+  --fg:#f3f6fb; --muted:rgba(228,236,248,.7); --muted2:rgba(228,236,248,.45);
+  --gold:#d9a441; --gold-light:#f2c66d; --gold-dim:rgba(217,164,65,.4);
+  --steel:#9db1cf; --emerald:#34d399; --radius:22px;
+}
+* { box-sizing:border-box; margin:0; padding:0; }
+html { scroll-behavior:smooth; }
+section[id] { scroll-margin-top:84px; }
+body {
+  background:
+    radial-gradient(900px 620px at 85% -10%, rgba(64,105,190,.20), transparent 60%),
+    radial-gradient(760px 540px at -5% 25%, rgba(217,164,65,.10), transparent 55%),
+    radial-gradient(1100px 720px at 50% 115%, rgba(45,80,150,.24), transparent 62%),
+    linear-gradient(180deg,#060a13 0%, #0a1120 55%, #060a13 100%);
+  background-attachment:fixed;
+  color:var(--fg);
+  font-family:'Inter','Vazirmatn',system-ui,sans-serif;
+  overflow-x:hidden; min-height:100vh;
+}
+[dir="rtl"] body { font-family:'Vazirmatn','Inter',system-ui,sans-serif; }
+::selection { background:rgba(217,164,65,.35); }
+
+#bgCanvas { position:fixed; inset:0; z-index:-2; width:100%; height:100%; display:block; opacity:.55; }
+#bgShade { position:fixed; inset:0; z-index:-1; pointer-events:none;
+  background:radial-gradient(ellipse at 50% 32%, rgba(6,10,19,.28), rgba(6,10,19,.74) 76%); }
+
+::-webkit-scrollbar { width:10px; }
+::-webkit-scrollbar-track { background:var(--bg2); }
+::-webkit-scrollbar-thumb { background:rgba(217,164,65,.35); border-radius:6px; }
+::-webkit-scrollbar-thumb:hover { background:rgba(217,164,65,.55); }
+
+a { color:inherit; text-decoration:none; }
+button { font-family:inherit; cursor:pointer; border:none; background:none; color:inherit; }
+img { max-width:100%; display:block; }
+
+/* ===== Header ===== */
+.header { position:fixed; top:0; left:0; right:0; z-index:50; transition:all .3s; }
+.header.scrolled { background:rgba(6,10,19,.72); backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border-soft); box-shadow:0 10px 40px -20px rgba(0,0,0,.8); }
+.header-inner { max-width:1200px; margin:0 auto; padding:0 20px; height:68px;
+  display:flex; align-items:center; justify-content:space-between; }
+.logo { display:flex; align-items:center; gap:12px; }
+.logo-mark { width:40px; height:40px; border-radius:12px; background:linear-gradient(135deg,#b98a2e,#f2c66d);
+  display:flex; align-items:center; justify-content:center; box-shadow:0 4px 18px rgba(217,164,65,.35); }
+.logo-mark svg { width:22px; height:22px; fill:#0b1220; }
+.logo-text { display:flex; flex-direction:column; line-height:1; }
+.logo-title { font-size:17px; font-weight:900; }
+.logo-sub { font-size:10px; font-weight:700; letter-spacing:.28em; color:var(--gold); margin-top:3px; }
+.nav-desktop { display:none; gap:2px; }
+.nav-desktop a { padding:8px 15px; font-size:13.5px; font-weight:600; color:var(--muted);
+  border-radius:10px; transition:.2s; }
+.nav-desktop a:hover { color:var(--gold-light); background:rgba(217,164,65,.1); }
+.header-actions { display:flex; align-items:center; gap:8px; }
+.lang-toggle { border:1px solid var(--border-soft); background:rgba(255,255,255,.06);
+  backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
+  color:var(--fg); border-radius:999px; padding:7px 14px; font-size:12px; font-weight:700;
+  display:flex; align-items:center; gap:7px; transition:.25s; }
+.lang-toggle:hover { border-color:var(--gold-dim); color:var(--gold-light); background:rgba(217,164,65,.1); }
+.lang-toggle svg { width:14px; height:14px; }
+.lang-toggle .sep { color:var(--muted2); }
+.mobile-btn { display:flex; width:40px; height:40px; border-radius:12px;
+  background:rgba(255,255,255,.06); border:1px solid var(--border-soft);
+  align-items:center; justify-content:center; }
+.mobile-btn svg { width:20px; height:20px; }
+.nav-mobile { display:none; flex-direction:column; gap:2px; padding:10px 16px 14px;
+  border-top:1px solid var(--border-soft); background:rgba(6,10,19,.92); backdrop-filter:blur(20px); }
+.nav-mobile.open { display:flex; }
+.nav-mobile a { padding:10px 14px; font-size:14px; font-weight:600; color:var(--muted); border-radius:10px; }
+.nav-mobile a:hover { background:rgba(217,164,65,.1); color:var(--gold-light); }
+@media (min-width:860px) { .nav-desktop { display:flex; } .mobile-btn { display:none; } .nav-mobile { display:none !important; } }
+
+/* ===== Hero ===== */
+.hero { position:relative; min-height:100vh; display:flex; align-items:center; padding:110px 0 70px; }
+.hero-stars { color:var(--gold); font-size:13px; letter-spacing:6px; }
+.hero-inner { position:relative; max-width:1200px; margin:0 auto; padding:0 20px; width:100%;
+  display:grid; gap:56px; align-items:center; }
+@media (min-width:980px) { .hero-inner { grid-template-columns:1.05fr 1fr; } }
+.hero-left { display:flex; flex-direction:column; gap:22px; }
+.hero-badge { display:inline-flex; align-items:center; gap:9px; align-self:flex-start;
+  border:1px solid var(--border-soft); background:rgba(255,255,255,.06);
+  backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px);
+  padding:7px 15px; border-radius:999px; font-size:12.5px; font-weight:600; color:var(--muted); }
+.hero-badge .dot { width:7px; height:7px; border-radius:50%; background:var(--emerald); animation:pulse 2.2s infinite; }
+@keyframes pulse { 0%,100% { opacity:1; } 50% { opacity:.35; } }
+.hero-title { font-size:52px; font-weight:900; line-height:1.02; letter-spacing:-.02em; }
+@media (min-width:640px) { .hero-title { font-size:68px; } }
+.hero-title .line1 { display:block; }
+.hero-title .line2 { display:block; background:linear-gradient(90deg,#b98a2e,#f2c66d);
+  -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; color:transparent; }
+.hero-sub { font-size:16.5px; line-height:1.7; color:var(--muted); max-width:34rem; }
+.hero-cta { display:flex; flex-wrap:wrap; gap:12px; margin-top:4px; }
+.btn-primary { background:linear-gradient(90deg,#b98a2e,#e8c064); color:#0b1220; font-weight:800;
+  padding:13px 28px; border-radius:999px; font-size:15px; display:inline-flex; align-items:center; gap:8px;
+  box-shadow:0 8px 28px rgba(217,164,65,.28); transition:transform .25s, box-shadow .25s, filter .25s; }
+.btn-primary:hover { transform:translateY(-2px); filter:brightness(1.08);
+  box-shadow:0 14px 34px -8px rgba(217,164,65,.55); }
+.btn-primary svg { width:16px; height:16px; }
+[dir="rtl"] .btn-primary svg { transform:rotate(180deg); }
+.btn-secondary { border:1px solid rgba(255,255,255,.18); background:rgba(255,255,255,.06);
+  backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
+  padding:13px 28px; border-radius:999px; font-size:15px; font-weight:700; transition:.25s; }
+.btn-secondary:hover { border-color:var(--gold-dim); color:var(--gold-light); transform:translateY(-2px); }
+.hero-stats { display:grid; gap:10px; grid-template-columns:repeat(2,1fr); margin-top:10px; }
+@media (min-width:640px) { .hero-stats { grid-template-columns:repeat(4,1fr); } }
+.stat-card { border:1px solid var(--border-soft);
+  background:linear-gradient(160deg, rgba(255,255,255,.09), rgba(255,255,255,.02)), rgba(10,16,30,.5);
+  backdrop-filter:blur(18px); -webkit-backdrop-filter:blur(18px);
+  border-radius:16px; padding:14px 10px; text-align:center;
+  transition:transform .3s, border-color .3s; }
+.stat-card:hover { transform:translateY(-3px); border-color:var(--gold-dim); }
+.stat-value { font-size:21px; font-weight:900; color:var(--gold-light); }
+.stat-label { font-size:9.5px; font-weight:700; text-transform:uppercase; letter-spacing:.12em;
+  color:var(--muted2); margin-top:3px; }
+[dir="rtl"] .stat-label { letter-spacing:0; }
+.hero-media { position:relative; width:100%; border-radius:28px; overflow:hidden;
+  border:1px solid rgba(217,164,65,.3); box-shadow:0 30px 80px -20px rgba(0,0,0,.7); height:300px; }
+@media (min-width:640px) { .hero-media { height:420px; } }
+@media (min-width:980px) { .hero-media { height:520px; } }
+.hero-media img { width:100%; height:100%; object-fit:cover; transition:transform .8s ease; }
+.hero-media:hover img { transform:scale(1.04); }
+.hero-media::after { content:''; position:absolute; inset:0;
+  background:linear-gradient(to top, rgba(6,10,19,.55), transparent 45%); pointer-events:none; }
+.hero-media-chip { position:absolute; bottom:14px; inset-inline-start:14px; z-index:2;
+  background:rgba(6,10,19,.65); backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
+  border:1px solid rgba(217,164,65,.35); border-radius:999px; padding:7px 15px;
+  font-size:11px; font-weight:800; letter-spacing:.14em; color:var(--gold-light); }
+
+/* ===== Sections ===== */
+.section { position:relative; padding:90px 0; }
+.section-top-line { height:1px; background:linear-gradient(90deg, transparent, rgba(255,255,255,.12), transparent); }
+.section-inner { max-width:1200px; margin:0 auto; padding:0 20px; }
+.section-header { text-align:center; margin-bottom:44px; }
+.section-badge { display:inline-flex; align-items:center; gap:8px;
+  border:1px solid var(--gold-dim); background:rgba(217,164,65,.08);
+  backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px);
+  padding:6px 16px; border-radius:999px; font-size:11px; font-weight:800;
+  text-transform:uppercase; letter-spacing:.2em; color:var(--gold-light); }
+[dir="rtl"] .section-badge { letter-spacing:0; }
+.section-title { font-size:34px; font-weight:900; margin-top:14px; }
+@media (min-width:640px) { .section-title { font-size:44px; } }
+.section-desc { margin-top:10px; font-size:15.5px; color:var(--muted); max-width:40rem;
+  margin-inline:auto; line-height:1.7; }
+
+/* ===== Cards ===== */
+.cards-grid { display:grid; gap:22px; grid-template-columns:1fr; }
+@media (min-width:700px) { .cards-grid { grid-template-columns:repeat(2,1fr); } }
+@media (min-width:1040px) { .cards-grid { grid-template-columns:repeat(3,1fr); } }
+
+.card { position:relative; overflow:hidden; border:1px solid var(--border-soft);
+  background:linear-gradient(160deg, rgba(255,255,255,.09), rgba(255,255,255,.02) 45%), rgba(10,16,30,.55);
+  backdrop-filter:blur(22px); -webkit-backdrop-filter:blur(22px);
+  border-radius:var(--radius);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.09), 0 20px 50px -30px rgba(0,0,0,.8);
+  transition:transform .45s cubic-bezier(.2,.8,.2,1), border-color .35s, box-shadow .45s;
+  display:flex; flex-direction:column; }
+.card:hover { transform:translateY(-9px);
+  border-color:rgba(242,198,109,.55);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.12),
+    0 30px 60px -20px rgba(0,0,0,.75),
+    0 18px 50px -18px rgba(217,164,65,.35); }
+
+/* درخششی که موقع هاور روی کارت می‌لغزه */
+.card::after { content:''; position:absolute; top:-10%; bottom:-10%; left:-70%; width:45%;
+  background:linear-gradient(105deg, transparent, rgba(255,255,255,.14), transparent);
+  transform:skewX(-18deg); transition:left .8s ease; pointer-events:none; z-index:3; }
+.card:hover::after { left:135%; }
+
+.card-stripe { height:3px; background:linear-gradient(90deg,#b98a2e,#f2c66d,transparent); }
+.card-media { position:relative; height:210px; overflow:hidden; }
+.card-media img { width:100%; height:100%; object-fit:cover; transition:transform .7s cubic-bezier(.2,.8,.2,1); }
+.card:hover .card-media img { transform:scale(1.08); }
+.card-media::after { content:''; position:absolute; inset:0;
+  background:linear-gradient(to top, rgba(6,10,19,.5), transparent 55%); }
+.card-status { position:absolute; top:13px; inset-inline-end:13px; z-index:2;
+  display:flex; align-items:center; gap:6px;
+  background:rgba(6,10,19,.6); backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
+  border:1px solid var(--border-soft); border-radius:999px; padding:4px 11px;
+  font-size:10.5px; font-weight:700; color:var(--emerald); }
+.card-status.retired { color:var(--muted2); }
+.card-status .dot { width:6px; height:6px; border-radius:50%; background:currentColor; animation:pulse 2.2s infinite; }
+.card-status.retired .dot { animation:none; }
+.card-designation { position:absolute; bottom:13px; inset-inline-start:13px; z-index:2;
+  font-size:10px; letter-spacing:.06em; color:rgba(255,255,255,.88);
+  background:rgba(6,10,19,.6); backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
+  border-radius:999px; padding:4px 11px; border:1px solid var(--border-soft); }
+.card-body { padding:20px 22px 24px; display:flex; flex-direction:column; flex:1; }
+.card-name { font-size:21px; font-weight:900; transition:color .3s; }
+.card:hover .card-name { color:var(--gold-light); }
+.card-role { margin-top:3px; font-size:13px; font-weight:600; color:var(--steel); }
+.card-specs { margin-top:15px; display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+.spec { border-radius:14px; background:rgba(255,255,255,.05); border:1px solid var(--border-soft);
+  padding:9px 12px; transition:background .3s, border-color .3s; }
+.card:hover .spec { background:rgba(255,255,255,.09); border-color:rgba(255,255,255,.16); }
+.spec dt { font-size:9.5px; font-weight:800; text-transform:uppercase; letter-spacing:.1em; color:var(--muted2); }
+[dir="rtl"] .spec dt { letter-spacing:0; }
+.spec dd { font-size:13px; font-weight:800; margin-top:2px; }
+.card-highlight { margin-top:14px; border-radius:12px; padding:10px 13px;
+  background:rgba(217,164,65,.08); border-inline-start:3px solid var(--gold);
+  font-size:12.5px; line-height:1.55; color:var(--muted); }
+
+/* توضیح کامل: مخفی — فقط با «ادامه مطلب» باز می‌شه */
+.card-desc { display:none; margin-top:14px; font-size:13.5px; line-height:1.8; color:var(--muted);
+  border-top:1px dashed var(--border-soft); padding-top:14px; }
+.card-desc.expanded { display:block; animation:descIn .35s ease; }
+@keyframes descIn { from { opacity:0; transform:translateY(-6px); } to { opacity:1; transform:none; } }
+
+.readmore { margin-top:14px; align-self:flex-start; display:inline-flex; align-items:center; gap:7px;
+  font-size:12px; font-weight:800; letter-spacing:.08em; color:var(--gold-light);
+  padding:8px 16px; border-radius:999px;
+  background:rgba(217,164,65,.12); border:1px solid rgba(217,164,65,.32);
+  transition:background .25s, transform .25s, box-shadow .25s; }
+[dir="rtl"] .readmore { letter-spacing:0; text-transform:none; }
+.readmore:hover { background:rgba(217,164,65,.24); transform:translateY(-1px);
+  box-shadow:0 6px 18px -6px rgba(217,164,65,.5); }
+.readmore svg { width:13px; height:13px; transition:transform .25s; }
+[dir="rtl"] .readmore svg { transform:rotate(180deg); }
+.readmore:hover svg { transform:translateX(3px); }
+[dir="rtl"] .readmore:hover svg { transform:rotate(180deg) translateX(3px); }
+.card-body:has(.card-desc.expanded) .readmore svg { transform:rotate(90deg); }
+[dir="rtl"] .card-body:has(.card-desc.expanded) .readmore svg { transform:rotate(-90deg); }
+
+/* ===== Blog ===== */
+.blog-grid { display:grid; gap:22px; }
+@media (min-width:1000px) { .blog-grid { grid-template-columns:1.9fr 1fr; } }
+.blog-featured { border:1px solid var(--border-soft); border-radius:var(--radius);
+  background:linear-gradient(150deg, rgba(217,164,65,.1), rgba(255,255,255,.02) 55%), rgba(10,16,30,.5);
+  backdrop-filter:blur(22px); -webkit-backdrop-filter:blur(22px);
+  padding:36px 38px; display:flex; flex-direction:column; min-height:320px;
+  transition:transform .35s, border-color .35s, box-shadow .35s; }
+.blog-featured:hover { border-color:rgba(242,198,109,.5); transform:translateY(-5px);
+  box-shadow:0 24px 50px -20px rgba(0,0,0,.7), 0 14px 40px -18px rgba(217,164,65,.3); }
+.blog-tag { align-self:flex-start; border-radius:999px; background:rgba(217,164,65,.14);
+  color:var(--gold-light); padding:5px 13px; font-size:10px; font-weight:800;
+  text-transform:uppercase; letter-spacing:.12em; }
+.blog-featured-title { margin-top:18px; font-size:27px; font-weight:900; line-height:1.25; }
+@media (min-width:640px) { .blog-featured-title { font-size:33px; } }
+.blog-featured-excerpt { margin-top:14px; font-size:15px; color:var(--muted); line-height:1.75; flex:1; }
+.blog-meta { margin-top:22px; font-size:12px; color:var(--muted2); }
+.blog-side { display:flex; flex-direction:column; gap:14px; }
+.blog-side-item { display:flex; gap:15px; align-items:flex-start;
+  border:1px solid var(--border-soft); background:rgba(255,255,255,.05);
+  backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px);
+  border-radius:18px; padding:16px; cursor:pointer;
+  transition:transform .25s, border-color .25s, background .25s; }
+.blog-side-item:hover { border-color:var(--gold-dim); background:rgba(255,255,255,.09);
+  transform:translateX(4px); }
+[dir="rtl"] .blog-side-item:hover { transform:translateX(-4px); }
+.blog-side-emoji { flex-shrink:0; width:48px; height:48px; border-radius:13px;
+  background:rgba(217,164,65,.12); border:1px solid var(--gold-dim);
+  display:flex; align-items:center; justify-content:center; font-size:21px; }
+.blog-side-title { font-size:14px; font-weight:700; line-height:1.5; }
+.blog-side-meta { margin-top:5px; font-size:11px; color:var(--muted2); }
+
+/* ===== Footer ===== */
+.footer { border-top:1px solid var(--border-soft);
+  background:linear-gradient(180deg, rgba(6,10,19,.55), rgba(10,17,32,.85));
+  backdrop-filter:blur(18px); -webkit-backdrop-filter:blur(18px); }
+.footer-inner { max-width:1200px; margin:0 auto; padding:56px 20px 40px;
+  display:grid; gap:36px; grid-template-columns:1fr; }
+@media (min-width:900px) { .footer-inner { grid-template-columns:1.6fr 1fr 1fr; } }
+.footer-brand-text { margin-top:14px; font-size:12.5px; color:var(--muted2); line-height:1.8; max-width:26rem; }
+.footer-col h4 { font-size:11px; font-weight:800; text-transform:uppercase; letter-spacing:.2em;
+  color:var(--gold); margin-bottom:16px; }
+[dir="rtl"] .footer-col h4 { letter-spacing:0; }
+.footer-col ul { list-style:none; display:flex; flex-direction:column; gap:9px; }
+.footer-col a { font-size:13.5px; color:var(--muted); transition:.2s; }
+.footer-col a:hover { color:var(--gold-light); }
+.footer-newsletter p { font-size:12.5px; color:var(--muted2); margin-bottom:12px; line-height:1.7; }
+.footer-newsletter form { display:flex; flex-direction:column; gap:8px; }
+.footer-newsletter input { width:100%; border:1px solid var(--border-soft);
+  background:rgba(255,255,255,.05); border-radius:12px; padding:10px 13px;
+  font-size:13.5px; color:var(--fg); transition:border-color .2s; }
+.footer-newsletter input:focus { outline:none; border-color:var(--gold-dim); }
+.footer-newsletter button { width:100%; border-radius:12px; padding:10px;
+  background:linear-gradient(90deg,#b98a2e,#e8c064); color:#0b1220;
+  font-size:13.5px; font-weight:800; transition:transform .2s, box-shadow .2s; }
+.footer-newsletter button:hover { transform:translateY(-1px); box-shadow:0 8px 20px -6px rgba(217,164,65,.5); }
+.footer-bottom { border-top:1px solid var(--border-soft); max-width:1200px; margin:0 auto; padding:20px;
+  display:flex; flex-direction:column; gap:8px; font-size:11.5px; color:var(--muted2); }
+@media (min-width:640px) { .footer-bottom { flex-direction:row; justify-content:space-between; } }
+/* ===== Scroll Reveal ===== */
+.reveal { opacity:0; transform:translateY(26px);
+  transition:opacity .65s ease, transform .65s cubic-bezier(.2,.8,.2,1); }
+.reveal.visible { opacity:1; transform:none; }
+/* ===== Progress bar ===== */
+#progressBar { position:fixed; top:0; left:0; height:3px; width:0%; z-index:60;
+  background:linear-gradient(90deg,#b98a2e,#f2c66d); box-shadow:0 0 10px rgba(217,164,65,.6); }
+[dir="rtl"] #progressBar { left:auto; right:0; }
+
+/* ===== Back to top ===== */
+#toTop { position:fixed; bottom:22px; inset-inline-end:22px; z-index:55;
+  width:46px; height:46px; border-radius:999px;
+  background:linear-gradient(135deg,#b98a2e,#f2c66d); color:#0b1220;
+  display:flex; align-items:center; justify-content:center;
+  box-shadow:0 10px 26px -8px rgba(217,164,65,.55);
+  opacity:0; pointer-events:none; transform:translateY(14px);
+  transition:opacity .3s, transform .3s; }
+#toTop.show { opacity:1; pointer-events:auto; transform:none; }
+#toTop:hover { transform:translateY(-3px); }
+#toTop svg { width:20px; height:20px; }
+
+/* ===== Modal + Lightbox ===== */
+.modal-overlay { position:fixed; inset:0; z-index:90; display:flex; align-items:center;
+  justify-content:center; padding:20px;
+  background:rgba(4,7,14,.82); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px);
+  opacity:0; pointer-events:none; transition:opacity .3s; }
+.modal-overlay.open { opacity:1; pointer-events:auto; }
+.modal-box { width:100%; max-width:720px; max-height:84vh; overflow-y:auto;
+  border:1px solid var(--border-soft); border-radius:22px; position:relative;
+  background:linear-gradient(160deg, rgba(255,255,255,.09), rgba(255,255,255,.02) 45%), rgba(10,16,30,.95);
+  backdrop-filter:blur(24px); -webkit-backdrop-filter:blur(24px);
+  padding:34px 32px;
+  transform:translateY(18px) scale(.98); transition:transform .3s cubic-bezier(.2,.8,.2,1); }
+.modal-overlay.open .modal-box { transform:none; }
+.modal-close { position:absolute; top:14px; inset-inline-end:14px; width:36px; height:36px;
+  border-radius:999px; background:rgba(255,255,255,.07); border:1px solid var(--border-soft);
+  display:flex; align-items:center; justify-content:center; transition:.2s; }
+.modal-close:hover { background:rgba(217,164,65,.2); border-color:var(--gold-dim); }
+.modal-close svg { width:14px; height:14px; }
+.modal-title { font-size:24px; font-weight:900; margin-top:16px; line-height:1.35; padding-inline-end:30px; }
+.modal-meta { margin-top:8px; font-size:12px; color:var(--muted2); }
+.modal-body { margin-top:18px; font-size:14.5px; line-height:1.95; color:var(--muted); }
+.modal-body p + p { margin-top:12px; }
+.lightbox-img { max-width:min(1100px,94vw); max-height:88vh; border-radius:18px;
+  border:1px solid rgba(217,164,65,.4); box-shadow:0 40px 100px -20px rgba(0,0,0,.9); cursor:zoom-out; }
+
+/* ===== Shimmer لود عکس + نشانگر زوم ===== */
+.card-media img { opacity:0; transition:transform .7s cubic-bezier(.2,.8,.2,1), opacity .5s ease; }
+.card-media img.loaded { opacity:1; }
+.hero-media img { opacity:0; transition:transform .8s ease, opacity .5s ease; }
+.hero-media img.loaded { opacity:1; }
+.card-media, .hero-media {
+  background:linear-gradient(100deg, rgba(255,255,255,.04) 30%, rgba(255,255,255,.1) 50%, rgba(255,255,255,.04) 70%);
+  background-size:200% 100%; animation:shimmer 1.5s infinite linear; }
+@keyframes shimmer { from { background-position:200% 0; } to { background-position:-200% 0; } }
+img.zoomable { cursor:zoom-in; }
+.blog-featured { cursor:pointer; }
+
+/* ===== Timeline ===== */
+.timeline { position:relative; max-width:760px; margin:0 auto; padding:10px 0; }
+.timeline::before { content:''; position:absolute; top:0; bottom:0; inset-inline-start:19px;
+  width:2px; background:linear-gradient(180deg, var(--gold), rgba(217,164,65,.1)); }
+.timeline-item { position:relative; padding:0 0 34px 56px; }
+[dir="rtl"] .timeline-item { padding:0 56px 34px 0; }
+.timeline-item:last-child { padding-bottom:0; }
+.timeline-dot { position:absolute; top:4px; inset-inline-start:10px; width:20px; height:20px;
+  border-radius:50%; background:var(--bg2); border:2px solid var(--gold);
+  box-shadow:0 0 12px rgba(217,164,65,.5); }
+.timeline-year { font-size:13px; font-weight:900; color:var(--gold-light); letter-spacing:.08em; }
+[dir="rtl"] .timeline-year { letter-spacing:0; }
+.timeline-title { margin-top:4px; font-size:17px; font-weight:800; }
+.timeline-text { margin-top:6px; font-size:13.5px; line-height:1.75; color:var(--muted); }
+
+/* ===== Compare ===== */
+.compare-box { max-width:860px; margin:0 auto; border:1px solid var(--border-soft);
+  border-radius:var(--radius); padding:30px 28px;
+  background:linear-gradient(160deg, rgba(255,255,255,.08), rgba(255,255,255,.02) 45%), rgba(10,16,30,.55);
+  backdrop-filter:blur(22px); -webkit-backdrop-filter:blur(22px); }
+.compare-selects { display:flex; flex-wrap:wrap; gap:14px; align-items:center; justify-content:center; }
+.compare-selects select { flex:1; min-width:200px; max-width:300px; padding:11px 14px; border-radius:12px;
+  background:rgba(255,255,255,.06); border:1px solid var(--border-soft); color:var(--fg);
+  font-family:inherit; font-size:14px; font-weight:600; }
+.compare-selects select:focus { outline:none; border-color:var(--gold-dim); }
+.compare-selects .vs { font-weight:900; color:var(--gold-light); font-size:15px; }
+.compare-btn { margin-top:18px; width:100%; padding:12px; border-radius:999px; font-weight:800; font-size:14px;
+  background:linear-gradient(90deg,#b98a2e,#e8c064); color:#0b1220; transition:transform .2s, box-shadow .2s; }
+.compare-btn:hover { transform:translateY(-2px); box-shadow:0 10px 24px -8px rgba(217,164,65,.5); }
+.compare-table { width:100%; border-collapse:collapse; margin-top:22px; }
+.compare-table th, .compare-table td { padding:11px 12px; text-align:center;
+  border-bottom:1px solid var(--border-soft); font-size:13.5px; }
+.compare-table th { font-size:10.5px; font-weight:800; text-transform:uppercase; letter-spacing:.1em; color:var(--muted2); }
+[dir="rtl"] .compare-table th { letter-spacing:0; }
+.compare-table td:first-child { text-align:start; font-weight:700; color:var(--muted); font-size:12px; }
+[dir="rtl"] .compare-table td:first-child { text-align:end; }
+.compare-table .winner { color:var(--gold-light); }
+.compare-table .compare-name { font-size:15px; font-weight:900; color:var(--fg); }
+
+/* ===== Fact strip ===== */
+.fact-strip { max-width:860px; margin:0 auto; display:flex; gap:16px; align-items:center;
+  border:1px solid var(--gold-dim); border-radius:var(--radius); padding:20px 24px;
+  background:linear-gradient(150deg, rgba(217,164,65,.1), rgba(255,255,255,.02) 60%), rgba(10,16,30,.5);
+  backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px); }
+.fact-emoji { font-size:30px; flex-shrink:0; }
+.fact-label { font-size:10px; font-weight:800; letter-spacing:.16em; color:var(--gold); text-transform:uppercase; }
+[dir="rtl"] .fact-label { letter-spacing:0; }
+.fact-text { margin-top:4px; font-size:14.5px; line-height:1.7; }
+.fact-refresh { margin-inline-start:auto; flex-shrink:0; width:40px; height:40px; border-radius:999px;
+  background:rgba(217,164,65,.12); border:1px solid var(--gold-dim);
+  display:flex; align-items:center; justify-content:center; color:var(--gold-light); transition:.25s; }
+.fact-refresh:hover { background:rgba(217,164,65,.25); transform:rotate(90deg); }
+.fact-refresh svg { width:17px; height:17px; }
+@media (max-width:560px){ .fact-strip { flex-wrap:wrap; } .fact-refresh { margin-inline-start:0; } }
+</style>
+</head>
+<body>
+
+<canvas id="bgCanvas"></canvas>
+<div id="bgShade"></div>
+<div id="progressBar"></div>
+
+<!-- ===== HEADER ===== -->
+<header class="header" id="header">
+  <div class="header-inner">
+    <a href="#home" class="logo">
+      <div class="logo-mark"><svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.6 7.1.6-5.4 4.7 1.6 7-6.2-3.7-6.2 3.7 1.6-7L2 9.2l7.1-.6z"/></svg></div>
+      <div class="logo-text"><span class="logo-title" data-i18n="app.title">US Military</span><span class="logo-sub">USAF</span></div>
+    </a>
+    <nav class="nav-desktop">
+      <a href="#home" data-i18n="nav.home">Home</a>
+      <a href="#fighters" data-i18n="nav.fighters">Fighters</a>
+      <a href="#drones" data-i18n="nav.drones">Drones</a>
+      <a href="#missiles" data-i18n="nav.missiles">Missiles</a><a href="#history" data-i18n="nav.history">History</a>
+<a href="#compare" data-i18n="nav.compare">Compare</a>
+      <a href="#blog" data-i18n="nav.blog">Blog</a>
+    </nav>
+    <div class="header-actions">
+      <button class="lang-toggle" id="langToggle" title="Language / زبان">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.7 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.7-3.8-9S9.5 5.6 12 3z"/></svg>
+        <span id="langShort">FA</span><span class="sep">|</span><span data-i18n="lang.toggle.label">فارسی</span>
+      </button>
+      <button class="mobile-btn" id="mobileBtn" aria-label="Menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path id="mobileIcon" d="M4 6h16M4 12h16M4 18h16" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+  </div>
+  <nav class="nav-mobile" id="navMobile">
+    <a href="#home" data-i18n="nav.home">Home</a>
+    <a href="#fighters" data-i18n="nav.fighters">Fighters</a>
+    <a href="#drones" data-i18n="nav.drones">Drones</a>
+    <a href="#missiles" data-i18n="nav.missiles">Missiles</a><a href="#history" data-i18n="nav.history">History</a>
+<a href="#compare" data-i18n="nav.compare">Compare</a>
+    <a href="#blog" data-i18n="nav.blog">Blog</a>
+  </nav>
+</header>
+
+<!-- ===== HERO ===== -->
+<section class="hero" id="home">
+  <div class="hero-inner">
+    <div class="hero-left">
+      <div class="hero-stars">★ ★ ★ ★ ★</div>
+      <div class="hero-badge"><span class="dot"></span><span data-i18n="hero.badge">United States Air Force — Arsenal Showcase</span></div>
+      <h1 class="hero-title">
+        <span class="line1" data-i18n="hero.title.line1">Defenders of</span>
+        <span class="line2" data-i18n="hero.title.line2">The Skies</span>
+      </h1>
+      <p class="hero-sub" data-i18n="hero.subtitle">A showcase of America's airpower — from supersonic fighters to stealth drones and precision missiles.</p>
+      <div class="hero-cta">
+        <a href="#fighters" class="btn-primary"><span data-i18n="hero.cta.primary">Explore Arsenal</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14m-6-6 6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <a href="#blog" class="btn-secondary" data-i18n="hero.cta.secondary">Read Blog</a>
+      </div>
+      <div class="hero-stats">
+  <div class="stat-card"><div class="stat-value" data-num="5200" data-suffix-en="+" data-suffix-fa="+" data-en="5,200+" data-fa="۵٬۲۰۰+">5,200+</div><div class="stat-label" data-i18n="hero.stat.aircraft">Active Aircraft</div></div>
+  <div class="stat-card"><div class="stat-value" data-num="320" data-suffix-en="K" data-suffix-fa=" هزار" data-en="320K" data-fa="۳۲۰ هزار">320K</div><div class="stat-label" data-i18n="hero.stat.personnel">Personnel</div></div>
+  <div class="stat-card"><div class="stat-value" data-num="80" data-suffix-en="+" data-suffix-fa="+" data-en="80+" data-fa="۸۰+">80+</div><div class="stat-label" data-i18n="hero.stat.bases">Global Bases</div></div>
+  <div class="stat-card"><div class="stat-value" data-num="77" data-suffix-en="" data-suffix-fa="" data-en="77" data-fa="۷۷">77</div><div class="stat-label" data-i18n="hero.stat.legacy">Years of Legacy</div></div>
+</div>
+      </div>
+    <div>
+      <figure class="hero-media">
+        <img id="heroImg" class="zoomable" src="https://commons.wikimedia.org/wiki/Special:FilePath/Lockheed%20Martin%20F-22A%20Raptor%20JSOH.jpg?width=1600" alt="F-22 Raptor" onload="this.classList.add('loaded')" />
+<figcaption class="hero-media-chip" data-i18n="hero.chip">F-22 RAPTOR</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<section style="padding:10px 0 0;">
+  <div class="section-inner">
+    <div class="fact-strip" id="factStrip"></div>
+  </div>
+</section><div id="equipmentSections"></div><!-- ===== TIMELINE ===== -->
+<section class="section" id="history">
+  <div class="section-top-line"></div>
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="section-badge" data-i18n="nav.history">History</div>
+      <h2 class="section-title" data-i18n="timeline.title">A Legacy in the Skies</h2>
+      <p class="section-desc" data-i18n="timeline.desc">Seventy-seven years of air dominance — the moments that shaped it.</p>
+    </div>
+    <div class="timeline" id="timelineWrap"></div>
+  </div>
+</section>
+
+<!-- ===== COMPARE ===== -->
+<section class="section" id="compare">
+  <div class="section-top-line"></div>
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="section-badge" data-i18n="compare.badge">Head to Head</div>
+      <h2 class="section-title" data-i18n="compare.title">Compare Equipment</h2>
+      <p class="section-desc" data-i18n="compare.desc">Pick any two and see how they stack up on paper.</p>
+    </div>
+    <div class="compare-box">
+      <div class="compare-selects">
+        <select id="cmpA"></select>
+        <span class="vs">VS</span>
+        <select id="cmpB"></select>
+      </div>
+      <button class="compare-btn" id="cmpBtn" data-i18n="compare.btn">Compare</button>
+      <div id="compareResult"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== BLOG ===== -->
+<section class="section" id="blog">
+  <div class="section-top-line"></div>
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="section-badge" data-i18n="nav.blog">Blog</div>
+      <h2 class="section-title" data-i18n="blog.title">From The Flight Line</h2>
+      <p class="section-desc" data-i18n="blog.subtitle">Stories, analysis, and history from the cutting edge of military aviation.</p>
+    </div>
+    <div class="blog-grid" id="blogGrid"></div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <a href="#home" class="logo">
+        <div class="logo-mark"><svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.6 7.1.6-5.4 4.7 1.6 7-6.2-3.7-6.2 3.7 1.6-7L2 9.2l7.1-.6z"/></svg></div>
+        <div class="logo-text"><span class="logo-title" data-i18n="app.title">US Military</span><span class="logo-sub">USAF</span></div>
+      </a>
+      <p class="footer-brand-text" data-i18n="footer.about">An independent showcase featuring the United States Air Force arsenal. Not affiliated with the U.S. Department of Defense.</p>
+    </div>
+    <div class="footer-col">
+      <h4 data-i18n="footer.explore">Explore</h4>
+      <ul id="footerExplore"></ul>
+    </div>
+    <div class="footer-col footer-newsletter">
+      <h4 data-i18n="footer.connect">Connect</h4>
+      <p data-i18n="newsletter.desc">Subscribe for new featured aircraft and stories.</p>
+      <form id="newsForm">
+        <input type="email" id="newsletterEmail" required data-i18n-placeholder="newsletter.placeholder" placeholder="you@email.com" />
+        <button type="submit" id="newsletterBtn" data-i18n="newsletter.btn">Subscribe</button>
+      </form>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p data-i18n="footer.copyright">US Military Blog. Crafted with passion.</p>
+    <p data-i18n="footer.rights">Photos: official U.S. Air Force / Wikimedia (public domain). For educational purposes.</p>
+  </div>
+</footer>
+<!-- ===== POST MODAL ===== -->
+<div class="modal-overlay" id="postModal">
+  <div class="modal-box">
+    <button class="modal-close" id="postClose" aria-label="Close">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 6l12 12M18 6L6 18" stroke-linecap="round"/></svg>
+    </button>
+    <span class="blog-tag" id="postTag"></span>
+    <h3 class="modal-title" id="postTitle"></h3>
+    <div class="modal-meta" id="postMeta"></div>
+    <div class="modal-body" id="postBody"></div>
+  </div>
+</div>
+
+<!-- ===== IMAGE LIGHTBOX ===== -->
+<div class="modal-overlay" id="imgLightbox">
+  <img class="lightbox-img" id="lightboxImg" src="" alt="" />
+</div>
+
+<button id="toTop" aria-label="Back to top">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 19V5m-7 7 7-7 7 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</button>
+
+<!-- Three.js (UMD build — نسخه‌ای که واقعاً کار می‌کند) -->
+<script src="https://cdn.jsdelivr.net/npm/three@0.149.0/build/three.min.js"></script>
+
+<script>
+/* ================= I18N ================= */
+const I18N = {
+  "app.title": { en: "US Military", fa: "ارتش آمریکا" },
+  "nav.home": { en: "Home", fa: "خانه" },
+  "nav.fighters": { en: "Fighters", fa: "جنگنده‌ها" },
+  "nav.drones": { en: "Drones", fa: "پهپادها" },
+  "nav.missiles": { en: "Missiles", fa: "موشک‌ها" },
+  "nav.blog": { en: "Blog", fa: "وبلاگ" },
+  "lang.toggle.label": { en: "فارسی", fa: "English" },
+  "hero.badge": { en: "United States Air Force — Arsenal Showcase", fa: "نیروی هوایی ایالات متحده — نمایشگاه تجهیزات" },
+  "hero.title.line1": { en: "Defenders of", fa: "مدافعانِ" },
+  "hero.title.line2": { en: "The Skies", fa: "آسمان" },
+  "hero.subtitle": { en: "A showcase of America's airpower — from supersonic fighters to stealth drones and precision missiles.", fa: "نمایشی از توان هوایی آمریکا — از جنگنده‌های مافوق‌صوت تا پهپادهای رادارگریز و موشک‌های دقیق." },
+  "hero.cta.primary": { en: "Explore Arsenal", fa: "مشاهده تجهیزات" },
+  "hero.cta.secondary": { en: "Read Blog", fa: "مطالعه وبلاگ" },
+  "hero.stat.aircraft": { en: "Active Aircraft", fa: "هواپیمای فعال" },
+  "hero.stat.personnel": { en: "Personnel", fa: "نیروی انسانی" },
+  "hero.stat.bases": { en: "Global Bases", fa: "پایگاه در جهان" },
+  "hero.stat.legacy": { en: "Years of Legacy", fa: "سال قدمت" },
+  "section.fighters.title": { en: "Fighter Jets", fa: "جنگنده‌ها" },
+  "section.fighters.desc": { en: "Supersonic multirole aircraft engineered for air superiority and strike missions.", fa: "جنگنده‌های مافوق‌صوت چندمنظوره برای سلطه هوایی و ماموریت‌های ضربتی." },
+  "section.drones.title": { en: "Unmanned Aerial Vehicles", fa: "پهپادها" },
+  "section.drones.desc": { en: "Persistent, networked drones for intelligence, surveillance, and precision strike.", fa: "پهپادهای ماندگار و شبکه‌محور برای شناسایی، مراقبت و حمله دقیق." },
+  "section.missiles.title": { en: "Missiles & Munitions", fa: "موشک‌ها" },
+  "section.missiles.desc": { en: "Long-range cruise missiles and air-to-air ordnance that define modern warfare.", fa: "موشک‌های کروز دوربرد و مهمات هوا به هوایی که جنگ مدرن را تعریف می‌کنند." },
+  "card.speed": { en: "Max Speed", fa: "حداکثر سرعت" },
+  "card.range": { en: "Range", fa: "برد" },
+  "card.readMore": { en: "Read More", fa: "ادامه مطلب" },
+  "card.showLess": { en: "Show Less", fa: "نمایش کمتر" },
+  "card.status.active": { en: "Active", fa: "فعال" },
+  "card.status.retired": { en: "Retired · 2018", fa: "بازنشسته · ۲۰۱۸" },
+  "blog.title": { en: "From The Flight Line", fa: "از خط پرواز" },
+  "blog.subtitle": { en: "Stories, analysis, and history from the cutting edge of military aviation.", fa: "روایت‌ها، تحلیل‌ها و تاریخ هوانوردی نظامی، از لبه فناوری." },
+  "blog.readTime": { en: "min read", fa: "دقیقه مطالعه" },
+  "footer.about": { en: "An independent showcase featuring the United States Air Force arsenal. Not affiliated with the U.S. Department of Defense.", fa: "نمایشگاهی مستقل از تسلیحات نیروی هوایی ایالات متحده. وابسته به وزارت دفاع آمریکا نیست." },
+  "footer.explore": { en: "Explore", fa: "کاوش" },
+  "footer.connect": { en: "Connect", fa: "ارتباط" },
+  "footer.rights": { en: "Photos: official U.S. Air Force / Wikimedia (public domain). For educational purposes.", fa: "تصاویر: نیروی هوایی آمریکا / ویکی‌مدیا (مالکیت عمومی). صرفاً برای مقاصد آموزشی." },
+  "footer.copyright": { en: "US Military Blog. Crafted with passion.", fa: "وبلاگ ارتش آمریکا — ساخته‌شده با اشتیاق." },
+  "newsletter.desc": { en: "Subscribe for new featured aircraft and stories.", fa: "عضو شوید تا هواپیماهای جدید و روایت‌های تازه را ببینید." },
+  "newsletter.placeholder": { en: "you@email.com", fa: "ایمیل شما" },
+  "newsletter.btn": { en: "Subscribe", fa: "عضویت" },
+  "newsletter.done": { en: "✓ Subscribed", fa: "✓ عضو شدید" },
+    "hero.chip": { en: "F-22 RAPTOR", fa: "اف-۲۲ رپتور" },
+  "nav.history": { en: "History", fa: "تاریخچه" },
+  "nav.compare": { en: "Compare", fa: "مقایسه" },
+  "timeline.title": { en: "A Legacy in the Skies", fa: "میراثی در آسمان" },
+  "timeline.desc": { en: "Seventy-seven years of air dominance — the moments that shaped it.", fa: "هفتاد و هفت سال سلطه هوایی — لحظه‌هایی که آن را ساختند." },
+  "compare.badge": { en: "Head to Head", fa: "رو در رو" },
+  "compare.title": { en: "Compare Equipment", fa: "مقایسه تجهیزات" },
+  "compare.desc": { en: "Pick any two and see how they stack up on paper.", fa: "دو تجهیز را انتخاب کن و ببین روی کاغذ چه کسی برتر است." },
+  "compare.btn": { en: "Compare", fa: "مقایسه کن" },
+  "compare.speed": { en: "Max Speed", fa: "حداکثر سرعت" },
+  "compare.range": { en: "Range", fa: "برد" },
+  "compare.category": { en: "Category", fa: "دسته" },
+  "compare.draw": { en: "Draw", fa: "مساوی" },
+  "fact.label": { en: "Did you know?", fa: "می‌دونستی؟" },
+  "blog.byline": { en: "US Military Editorial", fa: "تحریریه" },
+};
+const FA_DIGITS = '۰۱۲۳۴۵۶۷۸۹';
+const toFa = (s) => String(s).replace(/[0-9]/g, (d) => FA_DIGITS[d]);
+let currentLang = 'en';
+const t = (key) => { const n = I18N[key]; return n && currentLang in n ? n[currentLang] : key; };
+
+/* ================= DATA ================= */
+const WM = (file, w) => `https://commons.wikimedia.org/wiki/Special:FilePath/${encodeURIComponent(file)}?width=${w || 1200}`;
+
+const EQUIPMENT = [
+  { id:"f-22", category:"fighters", emoji:"✈️", img:WM("Lockheed Martin F-22A Raptor JSOH.jpg"),
+    name:{en:"F-22 Raptor",fa:"اف-۲۲ رپتور"}, designation:{en:"5TH GEN · AIR SUPERIORITY",fa:"نسل پنجم · برتری هوایی"},
+    role:{en:"Stealth Air Superiority Fighter",fa:"جنگنده برتری هوایی رادارگریز"},
+    speed:{en:"Mach 2.25",fa:"ماخ ۲٫۲۵"}, range:{en:"1,840 mi",fa:"۲٬۹۶۰ کیلومتر"},
+    highlight:{en:"Stealth + Supercruise + Thrust Vectoring — an unmatched triad.",fa:"رادارگریزی + سوپرکروز + تغییر بردار رانش — سه‌گانه بی‌همتا."},
+    description:{en:"The F-22 Raptor is the USAF's premier fifth-generation, twin-engine, single-seat, all-weather stealth air superiority fighter, built by Lockheed Martin. It combines supercruise (supersonic flight without afterburners), radar-evading airframe geometry, thrust-vectoring nozzles for unmatched maneuverability, and a sensor suite that fuses data from multiple sources into a single tactical picture. Designed to project air dominance, the F-22 has never been defeated in mock combat and remains the gold standard for air superiority.",fa:"اف-۲۲ رپتور جنگنده برتری هوایی رادارگریزِ نسل پنجم، دوموتوره، تک‌سرنشینه و همه‌اقلیمِ نیروی هوایی ایالات متحده است؛ ساخت لاکهید مارتین. رپتور سوپرکروز (پرواز مافوق‌صوت بدون پس‌سوز)، بدنه رادارگریز، نازل‌های تغییر بردار رانش برای مانور بی‌همتا و مجموعه حسگری را یکجا دارد که داده‌های چند منبع را در یک تصویر تاکتیکی واحد ادغام می‌کند. اف-۲۲ برای اعمال سلطه هوایی طراحی شده، در رزم تمرینی هرگز شکست نخورده و هنوز استاندارد طلایی برتری هوایی است."} },
+  { id:"f-35", category:"fighters", emoji:"✈️", img:WM("F-35A flight (cropped).jpg"),
+    name:{en:"F-35 Lightning II",fa:"اف-۳۵ لایتنینگ ۲"}, designation:{en:"5TH GEN · MULTIROLE",fa:"نسل پنجم · چندمنظوره"},
+    role:{en:"Stealth Multirole Strike Fighter",fa:"جنگنده ضربتی چندمنظوره رادارگریز"},
+    speed:{en:"Mach 1.6",fa:"ماخ ۱٫۶"}, range:{en:"1,500 mi",fa:"۲٬۴۰۰ کیلومتر"},
+    highlight:{en:"Three variants, one platform — land, sea, and carrier.",fa:"سه نسخه، یک سکو — خشکی، دریا و ناو."},
+    description:{en:"The F-35 Lightning II is a family of single-seat, all-weather, stealth multirole fighters built for air superiority, strike, and electronic warfare. With three variants — F-35A conventional, F-35B STOVL, and F-35C carrier — it serves the U.S. Air Force, Marine Corps, and Navy. Its sensor fusion is the most advanced in any fighter: the Distributed Aperture System provides 360° infrared vision, while the AESA radar and MADL datalink let a single F-35 see, share, and coordinate across an entire battlespace.",fa:"اف-۳۵ لایتنینگ ۲ خانواده‌ای از جنگنده‌های چندمنظوره رادارگریز، تک‌سرنشینه و همه‌اقلیم برای برتری هوایی، حمله و جنگ الکترونیک است. این جنگنده با سه نسخه — اف-۳۵A متعارف، اف-۳۵B عمود/کوتاه‌برخاست و اف-۳۵C ناوپایه — در خدمت نیروی هوایی، تفنگداران دریایی و نیروی دریایی آمریکاست. ادغام حسگرهای آن پیشرفته‌ترین در میان جنگنده‌هاست: سامانه دهانه توزیع‌شده دید مادون قرمز ۳۶۰ درجه می‌دهد و رادار AESA همراه با لینک داده MADL به یک فروند اف-۳۵ امکان می‌دهد کل میدان نبرد را ببیند و هماهنگ کند."} },
+  { id:"f-15", category:"fighters", emoji:"✈️", img:"https://thumb.wikimedia.org/wikipedia/commons/thumb/f/fb/Green_Flag_West_11-08.jpg/960px-Green_Flag_West_11-08.jpg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=thumbnail&_=20110624085300",
+    name:{en:"F-15 Eagle",fa:"اف-۱۵ ایگل"}, designation:{en:"4TH GEN · AIR SUPERIORITY",fa:"نسل چهارم · برتری هوایی"},
+    role:{en:"Twin-Engine Air Superiority Fighter",fa:"جنگنده برتری هوایی دوموتوره"},
+    speed:{en:"Mach 2.5+",fa:"ماخ ۲٫۵+"}, range:{en:"3,000 mi (ferry)",fa:"۴٬۸۰۰ کیلومتر (انتقالی)"},
+    highlight:{en:"104–0 combat record — the perfect sniper of the skies.",fa:"رکورد ۱۰۴–۰ — تک‌تیرانداز بی‌نقص آسمان."},
+    description:{en:"The F-15 Eagle is an American twin-engine, all-weather tactical fighter designed by McDonnell Douglas (now Boeing) to gain and maintain air supremacy. With an unprecedented combat record of 104 confirmed kills to zero losses, the F-15 has been the backbone of American air superiority since 1976. Its powerful APG-63(V)3 AESA radar lets it detect and engage multiple targets simultaneously, and the proven airframe continues to be upgraded through the F-15EX program.",fa:"اف-۱۵ ایگل جنگنده تاکتیکی دوموتوره و همه‌اقلیم آمریکایی است که مک‌دانل داگلاس (اکنون بوئینگ) آن را برای کسب و حفظ سلطه هوایی طراحی کرد. با رکورد بی‌سابقه ۱۰۴ پیروزی تأییدشده در برابر صفر باخت، اف-۱۵ از سال ۱۹۷۶ ستون فقرات برتری هوایی آمریکا بوده است. رادار قدرتمند APG-63(V)3 AESA امکان شناسایی و درگیری همزمان با چند هدف را می‌دهد و بدنه اثبات‌شده آن در قالب برنامه اف-۱۵EX پیوسته ارتقا می‌یابد."} },
+  { id:"mq-9", category:"drones", emoji:"🛰️", img:WM("MQ-9 Reaper UAV.jpg"),
+    name:{en:"MQ-9 Reaper",fa:"ام‌کیو-۹ ریپر"}, designation:{en:"HUNTER-KILLER UAV",fa:"پهپاد شکارچی · میان‌ارتفاع"},
+    role:{en:"Medium-Altitude Long-Endurance Strike UAV",fa:"پهپاد ضربتی میان‌ارتفاع، طولانی‌پرواز"},
+    speed:{en:"300 mph",fa:"۴۸۲ کیلومتر بر ساعت"}, range:{en:"1,150 mi",fa:"۱٬۸۵۰ کیلومتر"},
+    highlight:{en:"14-hour loiter with Hellfires — the persistent hunter.",fa:"۱۴ ساعت گشت با هلفایر — شکارچی خستگی‌ناپذیر."},
+    description:{en:"The MQ-9 Reaper is a medium-altitude, long-endurance UAV developed by General Atomics — the first hunter-killer UAV designed for long-range surveillance and precision strike. The Reaper can loiter for up to 14 hours while carrying up to four Hellfire missiles and two GBU-12 laser-guided bombs. Piloted remotely from ground control stations, it has fundamentally reshaped how the United States conducts counter-terrorism and ISR missions across the globe.",fa:"ام‌کیو-۹ ریپر پهپاد میان‌ارتفاعِ طولانی‌پروازِ ساخت جنرال اتمیکس است؛ نخستین پهپاد «شکارچی–شکار» که برای مراقبت دوربرد و حمله دقیق طراحی شد. ریپر تا ۱۴ ساعت در منطقه می‌ماند و می‌تواند تا ۴ موشک هلفایر و ۲ بمب هدایت لیزری GBU-12 حمل کند. کنترل از راه دور از ایستگاه‌های زمینی، شیوه انجام ماموریت‌های ضدتروریسم و شناسایی آمریکا را در سراسر جهان دگرگون کرده است."} },
+  { id:"rq-4", category:"drones", emoji:"🛰️", img:"https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e8/RQ-4_Global_Hawk_7.jpg/960px-RQ-4_Global_Hawk_7.jpg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=thumbnail&_=20060617152317",
+    name:{en:"RQ-4 Global Hawk",fa:"آر‌کیو-۴ گلوبال هاوک"}, designation:{en:"HALE · ISR UAV",fa:"پهپاد شناسایی · ارتفاع بالا"},
+    role:{en:"High-Altitude Long-Endurance Recon UAV",fa:"پهپاد شناسایی ارتفاع بالا، طولانی‌پرواز"},
+    speed:{en:"391 mph",fa:"۶۲۹ کیلومتر بر ساعت"}, range:{en:"12,300 mi",fa:"۱۹٬۷۹۳ کیلومتر"},
+    highlight:{en:"34 hours aloft · 60,000 ft · 40,000 mi² surveyed per day.",fa:"۳۴ ساعت پرواز · ۶۰ هزار فوت · پایش ۴۰ هزار مایل مربع در روز."},
+    description:{en:"The RQ-4 Global Hawk is a high-altitude, long-endurance (HALE) unmanned reconnaissance aircraft. With a wingspan of 130.9 feet — wider than a 737 — it can stay airborne for over 34 hours at altitudes up to 60,000 feet. Its integrated sensor suite can survey up to 40,000 square miles of terrain per day, providing persistent ISR coverage no manned platform can match. The RQ-4 is the backbone of American strategic ISR.",fa:"آر‌کیو-۴ گلوبال هاوک پهپاد شناسایی ارتفاع بالا و طولانی‌پرواز (HALE) است. با دهانه بال ۱۳۰٫۹ فوت — عریض‌تر از بوئینگ ۷۳۷ — بیش از ۳۴ ساعت در ارتفاع تا ۶۰ هزار فوت پرواز می‌کند و مجموعه حسگر آن روزانه تا ۴۰ هزار مایل مربع زمین را پایش می‌کند؛ پوشش پایدار شناسایی که هیچ سکوی سرنشین‌داری هم‌تای آن نیست. آر‌کیو-۴ ستون فقرات شناسایی استراتژیک آمریکاست."} },
+  { id:"mq-1", category:"drones", emoji:"🛰️", img:WM("MQ-1 Predator unmanned aircraft.jpg"),
+    name:{en:"MQ-1 Predator",fa:"ام‌کیو-۱ پرداتور"}, designation:{en:"ISR / STRIKE UAV",fa:"پهپاد شناسایی / ضربتی"},
+    role:{en:"Reconnaissance & Strike UAV",fa:"پهپاد شناسایی و حمله"},
+    speed:{en:"135 mph",fa:"۲۱۷ کیلومتر بر ساعت"}, range:{en:"454 mi",fa:"۷۳۱ کیلومتر"},
+    highlight:{en:"The first armed hunter of the skies — it started an era.",fa:"نخستین شکارچی مسلح آسمان — آغازگر یک دوران."},
+    description:{en:"The MQ-1 Predator is the UAV that defined an era. Developed by General Atomics in the 1990s, it was the first UAV to combine long-endurance reconnaissance with armed strike capability, fundamentally transforming modern warfare. Although retired from USAF service in 2018, the Predator's legacy lives on — it pioneered remote operations, real-time full-motion video for tactical commanders, and the hunter-killer doctrine the Reaper later perfected.",fa:"ام‌کیو-۱ پرداتور پهپادی است که یک دوران را تعریف کرد. این پهپاد ساخت جنرال اتمیکس در دهه ۱۹۹۰، نخستین پهپادی بود که شناسایی طولانی‌پرواز را با توان حمله مسلحانه ترکیب کرد و جنگ مدرن را دگرگون ساخت. اگرچه در سال ۲۰۱۸ از خدمت بازنشسته شد، میراث آن زنده است: پیشگام کنترل از راه دور، ویدئوی زنده بلادرنگ برای فرماندهان تاکتیکی و دکترین شکارچی–شکار که ریپر بعدها به کمال رساند."} },
+  { id:"aim-9x", category:"missiles", emoji:"🚀", img:WM("AIM-9 Sidewinder.jpg"),
+    name:{en:"AIM-9X Sidewinder",fa:"ایم-۹ایکس سایدوایندر"}, designation:{en:"SHORT-RANGE AAM",fa:"موشک هوا به هوا · کوتاه‌برد"},
+    role:{en:"Short-Range Air-to-Air Missile",fa:"موشک کوتاه‌برد هوا به هوا"},
+    speed:{en:"Mach 3+",fa:"ماخ ۳+"}, range:{en:"22 mi (35 km)",fa:"۳۵ کیلومتر"},
+    highlight:{en:"90° off-boresight lock — see it, kill it.",fa:"قفل در ۹۰ درجه خارج از محور دید — ببین، شکار کن."},
+    description:{en:"The AIM-9X Sidewinder is the latest evolution of the world's most successful air-to-air missile family, in service since the 1950s. Its focal-plane-array infrared seeker and thrust-vectoring control allow the Block II to engage targets up to 90 degrees off boresight and even lock on after launch. With over 110,000 Sidewinders produced, it remains the gold standard of close-range air combat.",fa:"ایم-۹ایکس سایدوایندر جدیدترین نسل از موفق‌ترین خانواده موشک هوا به هوای جهان است که از دهه ۱۹۵۰ در خدمت است. جستجوگر مادون قرمز آرایه کانونی و کنترل تغییر بردار رانش به نسخه بلاک ۲ امکان درگیری با اهداف تا ۹۰ درجه خارج از محور دید و حتی قفل پس از پرتاب را می‌دهد. با بیش از ۱۱۰ هزار فروند تولیدشده، سایدوایندر همچنان استاندارد طلایی نبرد هوای نزدیک است."} },
+  { id:"aim-120", category:"missiles", emoji:"🚀", img:WM("AIM-120 AMRAAM.jpg"),
+    name:{en:"AIM-120 AMRAAM",fa:"ایم-۱۲۰ امرام"}, designation:{en:"BVR AAM",fa:"موشک هوا به هوا · فرابرد"},
+    role:{en:"Beyond-Visual-Range Air-to-Air Missile",fa:"موشک فراتر از برد دید، هوا به هوا"},
+    speed:{en:"Mach 4",fa:"ماخ ۴"}, range:{en:"100+ mi (160+ km)",fa:"+۱۶۰ کیلومتر"},
+    highlight:{en:"Fire-and-forget — dominance beyond visual range.",fa:"شلیک کن و رها کن — سلطه در فراتر از برد دید."},
+    description:{en:"The AIM-120 AMRAAM is the world's premier beyond-visual-range air-to-air weapon. Fire-and-forget with an active radar seeker, it receives midcourse datalink updates and switches to its active X-band radar for the terminal phase. Combat-proven over Iraq and the Balkans, AMRAAM is the backbone of BVR air combat for the F-15, F-16, F-22, and F-35.",fa:"ایم-۱۲۰ امرام برترین سلاح هوا به هوای فراتر از برد دید در جهان است. این موشک «شلیک‌کن و رهاکن» با جستجوگر رادار فعال، در فاز میانی به‌روزرسانی لینک داده می‌گیرد و در فاز پایانی با رادار فعال باند X به هدف می‌رسد. امرام که در عراق و بالکان آزموده شده، ستون فقرات نبرد فرابردِ دید برای اف-۱۵، اف-۱۶، اف-۲۲ و اف-۳۵ است."} },
+  { id:"agm-158", category:"missiles", emoji:"🚀", img:"https://thumb.wikimedia.org/wikipedia/commons/thumb/f/fc/Agm-158_JASSM.jpg/960px-Agm-158_JASSM.jpg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=thumbnail&_=20140430202728",
+    name:{en:"AGM-158 JASSM",fa:"اِی‌جی‌ام-۱۵۸ جاسم"}, designation:{en:"STEALTH CRUISE",fa:"موشک کروز · رادارگریز"},
+    role:{en:"Stealth Standoff Cruise Missile",fa:"موشک کروز رادارگریز دورایستا"},
+    speed:{en:"High subsonic",fa:"مادون صوت پرسرعت"}, range:{en:"575 mi (ER)",fa:"۹۲۵ کیلومتر (نسخه ER)"},
+    highlight:{en:"Penetrates defended airspace to strike 925 km away.",fa:"از پدافند عبور می‌کند و هدفی در ۹۲۵ کیلومتری را نابود می‌سازد."},
+    description:{en:"The AGM-158 JASSM is a stealthy standoff cruise missile with a low-observable airframe, GPS/INS navigation, and an imaging-infrared terminal seeker. Carrying a 2,000-lb penetrator warhead, JASSM lets bombers and fighters destroy high-value, heavily defended targets from outside enemy air defenses. The ER variant extends range to 925 km.",fa:"اِی‌جی‌ام-۱۵۸ جاسم موشکی رادارگریز با بدنه کم‌نمایان، ناوبری GPS/INS و جستجوگر مادون قرمز تصویری در فاز پایانی است. جاسم با کلاهک نفوذی ۹۰۰ کیلوگرمی به بمب‌افکن‌ها و جنگنده‌ها امکان می‌دهد اهداف باارزش و سنگین‌پدافند را از خارج از حریم پدافند هوایی دشمن نابود کنند. نسخه ER برد را به ۹۲۵ کیلومتر می‌رساند."} },
+];
+const POSTS = [
+  { featured:true, emoji:"🎖️", mins:8, tag:{en:"Analysis",fa:"تحلیل"},
+    title:{en:"Why the F-22 Still Rules the Sky",fa:"چرا اف-۲۲ هنوز پادشاه آسمان است"},
+    excerpt:{en:"Two decades after its first flight, the Raptor remains the benchmark every rival chases. We break down the stealth, kinematics, and sensor fusion that keep it untouchable.",fa:"دو دهه پس از نخستین پرواز، رپتور همچنان معیاری است که همه رقبا دنبالش می‌دوند. نگاهی به رادارگریزی، توان حرکتی و ادغام حسگرهایی که آن را دست‌نیافتنی نگه داشته است."},
+    body:{
+      en:"In December 2005, the U.S. Air Force declared the F-22 Raptor operational, and air combat quietly changed forever. The Raptor was the first fighter designed from the keel up around stealth — even the most advanced radars struggle to pick it out of the sky until it is far too close for comfort.\n\nBut stealth is only one third of the story. The F-22 cruises at supersonic speed without afterburners — a trick no rival has matched in two decades — and its thrust-vectoring nozzles let it maneuver in ways that defy what most pilots trained on. In exercises like Red Flag, Raptors routinely rack up lopsided scores against fourth-generation opponents, often before the opposing pilots even know they are being engaged.\n\nThe real weapon, though, is information. The Raptor's sensor suite fuses radar, passive receivers, and datalinks into a single tactical picture, letting a flight of four F-22s act as a flying command post for the entire battlespace. That is why, twenty years on, the F-22 remains the benchmark every rival chases.",
+      fa:"در دسامبر ۲۰۰۵ نیروی هوایی آمریکا اف-۲۲ رپتور را عملیاتی اعلام کرد و نبرد هوایی برای همیشه تغییر کرد. رپتور نخستین جنگنده‌ای بود که از پایه حول رادارگریزی طراحی شد؛ تا جایی که پیشرفته‌ترین رادارها هم به‌سختی آن را پیدا می‌کنند و وقتی می‌کنند، دیگر خیلی دیر است.\n\nاما رادارگریزی فقط یک‌سوم ماجراست. اف-۲۲ بدون پس‌سوز سرعت مافوق‌صوت را حفظ می‌کند — کاری که هیچ رقیبی در دو دهه نتوانسته انجام دهد — و نازل‌های تغییر بردار رانش به آن اجازه مانورهایی می‌دهند که برای بیشتر خلبانان باورنکردنی است. در رزمایش‌هایی مثل رد فگ، رپتورها معمولاً با نتیجه‌های نجومی بر رقبای نسل چهارم پیروز می‌شوند؛ اغلب قبل از اینکه خلبان طرف مقابل بفهمد درگیر شده است.\n\nاما سلاح واقعی، اطلاعات است. مجموعه حسگر رپتور رادار، گیرنده‌های غیرفعال و لینک داده را در یک تصویر تاکتیکی واحد ادغام می‌کند تا دسته چهار فروندی اف-۲۲ مثل یک مرکز فرماندهی پرنده برای کل میدان نبرد عمل کند. به همین دلیل است که بیست سال بعد، اف-۲۲ هنوز معیاری است که همه رقبا دنبالش می‌دوند."} },
+  { emoji:"🛰️", mins:6, tag:{en:"History",fa:"تاریخ"},
+    title:{en:"The Rise of the Reaper",fa:"ظهور ریپر"},
+    excerpt:{en:"From the first Predator flight in 1994 to today's hunter-killer doctrine — how unmanned flight rewrote the rules of air power.",fa:"از نخستین پرواز پرداتور در ۱۹۹۴ تا دکترین امروزی شکارچی–شکار؛ چگونه پرواز بدون سرنشین قواعد قدرت هوایی را بازنویسی کرد."},
+    body:{
+      en:"In 1994, a slow, awkward aircraft with a bulbous nose made its first flight in the Mojave Desert. Nobody called it a revolution. But the MQ-1 Predator would go on to rewrite the rules of war.\n\nThe Predator's genius was persistence. A fighter jet passes overhead in minutes; a Predator could watch a house for eighteen hours, feeding live video to commanders half a world away. In 2001, engineers bolted Hellfire missiles under its wings — and the era of the armed drone began.\n\nIts successor, the MQ-9 Reaper, took that idea to its logical conclusion: seven times the speed, far heavier payloads, and the ability to loiter for more than half a day over a target. Today, Reaper crews fly combat missions from air-conditioned ground stations thousands of miles from the fight — a reality that has reshaped not just tactics, but the entire ethics and politics of modern airpower.",
+      fa:"در سال ۱۹۹۴، یک هواپیمای کُند و دست‌وپاچلفتی با دماغه گرد در بیابان موجاو نخستین پروازش را انجام داد. کسی آن را انقلاب نمی‌دانست. اما ام‌کیو-۱ پرداتور قواعد جنگ را بازنویسی کرد.\n\nنبوغ پرداتور «ماندگاری» بود. جنگنده در چند دقیقه از روی هدف رد می‌شود؛ اما پرداتور می‌توانست ۱۸ ساعت یک ساختمان را زیر نظر بگیرد و ویدئوی زنده را به فرماندهانی در آن‌سوی کره زمین بفرستد. در ۲۰۰۱، مهندسان موشک هلفایر زیر بال‌هایش نصب کردند — و دوران پهپاد مسلح آغاز شد.\n\nجانشین آن، ام‌کیو-۹ ریپر، این ایده را به نتیجه نهایی رساند: هفت برابر سریع‌تر، مهمات سنگین‌تر و توان ماندن بیش از نیم‌روز روی هدف. امروز خدمه ریپر ماموریت‌های رزمی را از ایستگاه‌های زمینی، هزاران کیلومتر دورتر از میدان نبرد هدایت می‌کنند — واقعیتی که نه‌فقط تاکتیک، بلکه اخلاق و سیاست قدرت هوایی مدرن را دگرگون کرده است."} },
+  { emoji:"✈️", mins:7, tag:{en:"Tech",fa:"فناوری"},
+    title:{en:"Stealth 101: How Radar Evasion Works",fa:"رادارگریزی چگونه کار می‌کند"},
+    excerpt:{en:"Angles, coatings, and shaping — the science of disappearing from radar, explained without the math.",fa:"زاویه‌ها، پوشش‌ها و فرم بدنه — علم ناپدیدشدن از چشم رادار، بدون فرمول‌های پیچیده."},
+    body:{
+      en:"Radar works like shouting into a canyon and timing the echo. To hide from it, you have two options: stop the shout from reaching you, or make the echo go somewhere else.\n\nStealth aircraft do both. Their faceted or smoothly-curved shapes bounce radar waves away from the transmitter instead of back to it — the reason the F-117 looks like it was carved from origami, and the F-22 looks like it was melted. Radar-absorbent materials turn the little energy that does reflect into heat.\n\nThe famous paint and angles, however, are only half the battle. Stealth jets hide their infrared signature by burying engines deep in the airframe and mixing cool air with exhaust. Even the antennas, cockpit canopy and weapons bays are shaped and coated to stay quiet. Nothing is truly invisible — but the goal was never invisibility. The goal is simple: by the time the defender's radar can pick you out, you have already released your weapon and turned for home.",
+      fa:"رادار مثل فریاد زدن در یک درّه و زمان‌سنجی پژواک صدا است. برای پنهان‌ماندن دو راه داری: مانع رسیدن فریاد شوی، یا کاری کنی پژواک به جای دیگری برود.\n\nجنگنده‌های رادارگریز هر دو را انجام می‌دهند. فرم زاویه‌دار یا منحنیِ بدنه، امواج رادار را به‌جای بازگشت به فرستنده، به آسمان پرت می‌کند — دلیل اینکه اف-۱۱۷ مثل کاغذتایی به‌نظر می‌رسد و اف-۲۲ مثل ذوب‌شده. پوشش‌های جاذب رادار هم انرژی اندکی که منعکس می‌شود را به گرما تبدیل می‌کنند.\n\nاما رنگ و زاویه‌های معروف فقط نیمی از ماجراست. این جنگنده‌ها امضای مادون قرمزشان را هم پنهان می‌کنند: موتورها را عمیق داخل بدنه می‌سازند و هوای خنک را با دود خروجی مخلوط می‌کنند. حتی آنتن‌ها و محفظه مهمات هم شکل و پوشش مخصوص دارند. هیچ‌چیز واقعاً نادیدنی نیست — اما هدف هم هرگز نادیدنی‌بودن نبود. هدف ساده است: وقتی رادار مدافع بالاخره تو را پیدا می‌کند، تو همین الان سلاحت را رها کرده‌ای و برمی‌گردی خانه."} },
+];
+
+/* ================= RENDERING ================= */
+const FABLESS = (item) => 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(
+  `<svg xmlns='http://www.w3.org/2000/svg' width='800' height='450'><defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'><stop offset='0' stop-color='#0c1322'/><stop offset='1' stop-color='#1a2740'/></linearGradient></defs><rect width='800' height='450' fill='url(#g)'/><text x='400' y='225' font-size='88' text-anchor='middle'>${item.emoji}</text><text x='400' y='295' font-size='22' fill='rgba(255,255,255,0.45)' text-anchor='middle' font-family='monospace'>${item.designation.en}</text></svg>`);
+
+function cardHTML(item, lang) {
+  const retired = item.id === "mq-1";
+  return `
+  <article class="card">
+    <div class="card-stripe"></div>
+    <div class="card-media">
+      <img class="zoomable" src="${item.img}" alt="${item.name[lang]}" loading="lazy" onload="this.classList.add('loaded')" onerror="handleImgError(this,'${item.id}')" />
+      <span class="card-status ${retired ? "retired" : ""}"><span class="dot"></span>${retired ? t("card.status.retired") : t("card.status.active")}</span>
+      <span class="card-designation">${item.designation[lang]}</span>
+    </div>
+    <div class="card-body">
+      <h3 class="card-name">${item.name[lang]}</h3>
+      <p class="card-role">${item.role[lang]}</p>
+      <dl class="card-specs">
+        <div class="spec"><dt>${t("card.speed")}</dt><dd>${item.speed[lang]}</dd></div>
+        <div class="spec"><dt>${t("card.range")}</dt><dd>${item.range[lang]}</dd></div>
+      </dl>
+      <p class="card-highlight">${item.highlight[lang]}</p>
+      <button class="readmore"><span>${t("card.readMore")}</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <p class="card-desc">${item.description[lang]}</p>
+    </div>
+  </article>`;
+}
+
+function renderEquipment() {
+  const cats = ["fighters", "drones", "missiles"];
+  document.getElementById("equipmentSections").innerHTML = cats.map((cat, i) => `
+    <section class="section" id="${cat}">
+      ${i > 0 ? '<div class="section-top-line"></div>' : ""}
+      <div class="section-inner">
+        <div class="section-header">
+          <div class="section-badge">${t("nav." + cat)}</div>
+          <h2 class="section-title">${t("section." + cat + ".title")}</h2>
+          <p class="section-desc">${t("section." + cat + ".desc")}</p>
+        </div>
+        <div class="cards-grid">${EQUIPMENT.filter((e) => e.category === cat).map((e) => cardHTML(e, currentLang)).join("")}</div>
+      </div>
+    </section>`).join("");
+}
+
+function renderBlog() {
+  const [featured, ...side] = POSTS;
+  const mins = (n) => currentLang === "fa" ? `${toFa(n)} ${t("blog.readTime")}` : `${n} ${t("blog.readTime")}`;
+  document.getElementById("blogGrid").innerHTML = `
+    <article class="blog-featured" data-post="0">
+      <span class="blog-tag">${featured.tag[currentLang]}</span>
+      <h3 class="blog-featured-title">${featured.title[currentLang]}</h3>
+      <p class="blog-featured-excerpt">${featured.excerpt[currentLang]}</p>
+      <div class="blog-meta">${featured.emoji} · ${mins(featured.mins)}</div>
+    </article>
+    <div class="blog-side">
+      ${side.map((p, i) => `
+        <div class="blog-side-item" data-post="${i + 1}">
+          <div class="blog-side-emoji">${p.emoji}</div>
+          <div>
+            <div class="blog-side-title">${p.title[currentLang]}</div>
+            <div class="blog-side-meta">${p.tag[currentLang]} · ${mins(p.mins)}</div>
+          </div>
+        </div>`).join("")}
+    </div>`;
+}
+
+function renderFooterLists() {
+  const links = [["nav.home","#home"],["nav.fighters","#fighters"],["nav.drones","#drones"],["nav.missiles","#missiles"],["nav.blog","#blog"]];
+  document.getElementById("footerExplore").innerHTML = links.map(([k, href]) => `<li><a href="${href}">${t(k)}</a></li>`).join("");
+}
+/* ================= TIMELINE ================= */
+const TIMELINE = [
+  { year:{en:"1947",fa:"۱۹۴۷"}, title:{en:"Birth of an Independent Air Force",fa:"تولد نیروی هوایی مستقل"},
+    text:{en:"Under the National Security Act, the U.S. Air Force becomes a separate military branch — ending 40 years as the Army Air Forces.",fa:"با قانون امنیت ملی، نیروی هوایی شاخه‌ای مستقل می‌شود و ۴۰ سال وابستگی به نیروی زمینی پایان می‌یابد."} },
+  { year:{en:"1949",fa:"۱۹۴۹"}, title:{en:"First Non-Stop Flight Around the World",fa:"نخستین پرواز بدون توقف دور دنیا"},
+    text:{en:"Lucky Lady II circles the globe in 94 hours, proving aerial refueling changes everything.",fa:"«لاکی لی‌دی ۲» در ۹۴ ساعت کره زمین را دور می‌زند و نشان می‌دهد سوخت‌گیری هوایی همه‌چیز را تغییر می‌دهد."} },
+  { year:{en:"1955",fa:"۱۹۵۵"}, title:{en:"The B-52 Enters Service",fa:"ورود B-52 به خدمت"},
+    text:{en:"The Stratofortress begins a career that — seven decades later — is still not over. No aircraft in history has served longer.",fa:"«استراتوفورترس» کارنامه‌ای را آغاز می‌کند که پس از هفت دهه هنوز تمام نشده؛ هیچ هواپیمایی در تاریخ این‌قدر خدمت نکرده است."} },
+  { year:{en:"1969",fa:"۱۹۶۹"}, title:{en:"To the Moon",fa:"تا ماه"},
+    text:{en:"Apollo 11 rides a Saturn V to the Moon — with Air Force pilots Buzz Aldrin and Michael Collins aboard.",fa:"آپولو ۱۱ با موشک زحل ۵ به ماه می‌رود — در حالی که خلبانان نیروی هوایی باز آلدرین و مایکل کالینز در خدمه‌اند."} },
+  { year:{en:"1991",fa:"۱۹۹۱"}, title:{en:"Desert Storm Redefines Air War",fa:"طوفان صحرا، جنگ هوایی را بازتعریف می‌کند"},
+    text:{en:"Stealth aircraft strike Baghdad's defenses in the opening minutes. Airpower becomes the first move, not the follow-up.",fa:"هواپیماهای رادارگریز در نخستین دقیقه‌ها پدافند بغداد را می‌کوبند؛ قدرت هوایی از «مکمل» به «حرکت نخست» بدل می‌شود."} },
+  { year:{en:"2005",fa:"۲۰۰۵"}, title:{en:"F-22 Reaches Operational Service",fa:"آمادگی عملیاتی اف-۲۲"},
+    text:{en:"The Raptor enters squadron service, bringing fifth-generation stealth, supercruise, and sensor fusion to the frontline.",fa:"رپتور وارد یگان‌های عملیاتی می‌شود و رادارگریزی نسل پنجم، سوپرکروز و ادغام حسگر را به خط مقدم می‌آورد."} },
+  { year:{en:"2015",fa:"۲۰۱۵"}, title:{en:"The All-Stealth Future",fa:"آیندهٔ تمام‌رادارگریز"},
+    text:{en:"The F-35 joins the fleet in growing numbers, setting the course toward an all-fifth-generation fighter force.",fa:"اف-۳۵ با شتاب به ناوگان می‌پیوندد و مسیر نیروی جنگنده به‌سوی آینده‌ای تمام‌نسل‌پنجم هموار می‌شود."} },
+  { year:{en:"2023",fa:"۲۰۲۳"}, title:{en:"B-21 Raider Revealed",fa:"رونمایی B-21 ریدر"},
+    text:{en:"The world's first sixth-generation bomber rolls out in Palmdale — the stealth backbone for the next half-century.",fa:"نخستین بمب‌افکن نسل ششم جهان در پالم‌دیل رونمایی می‌شود؛ ستون فقرات رادارگریزی نیم‌قرن آینده."} },
+];
+function renderTimeline() {
+  document.getElementById("timelineWrap").innerHTML = TIMELINE.map((it) => `
+    <div class="timeline-item">
+      <span class="timeline-dot"></span>
+      <div class="timeline-year">${it.year[currentLang]}</div>
+      <div class="timeline-title">${it.title[currentLang]}</div>
+      <p class="timeline-text">${it.text[currentLang]}</p>
+    </div>`).join("");
+}
+
+/* ================= FACT STRIP ================= */
+const FACTS = [
+  { emoji:"🎯", text:{en:"The F-22's radar can detect a basketball-sized target from over 200 miles away.",fa:"رادار اف-۲۲ هدفی به اندازهٔ یک توپ بسکتبال را از فاصلهٔ بیش از ۳۰۰ کیلومتری شناسایی می‌کند."} },
+  { emoji:"🏆", text:{en:"F-15 Eagles have shot down more aircraft than any other modern fighter — and never lost one in air-to-air combat.",fa:"اف-۱۵ها بیش از هر جنگندهٔ مدرنی هواپیما زده‌اند — و در نبرد هوا به هوا حتی یک فروند هم از دست نداده‌اند."} },
+  { emoji:"📷", text:{en:"Global Hawk can survey an area the size of an entire state in a single day.",fa:"گلوبال هاوک می‌تواند در یک روز مساحتی به اندازهٔ یک استان بزرگ را پایش کند."} },
+  { emoji:"🪖", text:{en:"An F-35's helmet costs more than a luxury car — it projects targeting data onto the visor itself.",fa:"کلاه‌خود اف-۳۵ از یک خودروی لوکس گران‌تر است؛ داده‌های هدف‌گیری را روی شیشهٔ کلاه نمایش می‌دهد."} },
+  { emoji:"🛡️", text:{en:"The B-2 Spirit's flying-wing shape makes it nearly invisible to radar — drawn with slide rules in the 1980s.",fa:"فرم بال‌پرندهٔ B-2 اسپیریت آن را تقریباً نادیدنی می‌کند؛ طراحی‌ای که در دههٔ ۸۰ با خط‌کش محاسبه کشیده شد."} },
+];
+let factIdx = 0;
+function showFact() { factIdx = (Math.random() * FACTS.length) | 0; renderFact(); }
+function renderFact() {
+  const f = FACTS[factIdx];
+  document.getElementById("factStrip").innerHTML = `
+    <span class="fact-emoji">${f.emoji}</span>
+    <div>
+      <div class="fact-label">${t("fact.label")}</div>
+      <div class="fact-text">${f.text[currentLang]}</div>
+    </div>
+    <button class="fact-refresh" id="factBtn" aria-label="Another fact">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 1 1-2.64-6.36M21 3v6h-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>`;
+  document.getElementById("factBtn").addEventListener("click", showFact);
+}
+
+/* ================= COMPARE ================= */
+function parseSpeedKmh(s) {
+  const str = String(s.en || s);
+  const m = str.match(/Mach\s*([\d.]+)/i);
+  if (m) return parseFloat(m[1]) * 1200;
+  const mph = str.match(/([\d,]+)\s*mph/i);
+  if (mph) return parseFloat(mph[1].replace(/,/g, "")) * 1.609;
+  if (/subsonic/i.test(str)) return 950;
+  return 0;
+}
+function parseRangeKm(s) {
+  const str = String(s.en || s);
+  const mi = str.match(/([\d,]+)\s*mi/i);
+  if (mi) return parseFloat(mi[1].replace(/,/g, "")) * 1.609;
+  const km = str.match(/([\d,]+)\s*km/i);
+  if (km) return parseFloat(km[1].replace(/,/g, ""));
+  return 0;
+}
+function renderCompareSelects() {
+  const opts = EQUIPMENT.map((e) => `<option value="${e.id}">${e.name[currentLang]}</option>`).join("");
+  document.getElementById("cmpA").innerHTML = opts;
+  document.getElementById("cmpB").innerHTML = opts;
+  document.getElementById("cmpA").value = "f-22";
+  document.getElementById("cmpB").value = "f-15";
+}
+function doCompare() {
+  const a = EQUIPMENT.find((e) => e.id === document.getElementById("cmpA").value);
+  const b = EQUIPMENT.find((e) => e.id === document.getElementById("cmpB").value);
+  if (!a || !b) return;
+  const aS = parseSpeedKmh(a.speed), bS = parseSpeedKmh(b.speed);
+  const aR = parseRangeKm(a.range), bR = parseRangeKm(b.range);
+  const w = (x, y) => (x > y ? ' class="winner"' : "");
+  const cats = { fighters: t("nav.fighters"), drones: t("nav.drones"), missiles: t("nav.missiles") };
+  const note = a.id === b.id ? `<p style="text-align:center;color:var(--muted2);font-size:12px;">${t("compare.draw")}</p>` : "";
+  document.getElementById("compareResult").innerHTML = `
+    <table class="compare-table">
+      <tr><th></th>
+        <th${aS >= bS ? ' style="color:var(--gold-light)"' : ""}><span class="compare-name">${a.name[currentLang]}</span></th>
+        <th${bS > aS ? ' style="color:var(--gold-light)"' : ""}><span class="compare-name">${b.name[currentLang]}</span></th></tr>
+      <tr><td>${t("compare.speed")}</td><td${w(aS, bS)}>${a.speed[currentLang]}</td><td${w(bS, aS)}>${b.speed[currentLang]}</td></tr>
+      <tr><td>${t("compare.range")}</td><td${w(aR, bR)}>${a.range[currentLang]}</td><td${w(bR, aR)}>${b.range[currentLang]}</td></tr>
+      <tr><td>${t("compare.category")}</td><td>${cats[a.category]}</td><td>${cats[b.category]}</td></tr>
+    </table>${note}`;
+}
+
+/* ================= POST MODAL ================= */
+function openPost(i) {
+  const p = POSTS[i]; if (!p) return;
+  document.getElementById("postTag").textContent = p.tag[currentLang];
+  document.getElementById("postTitle").textContent = p.title[currentLang];
+  const mins = currentLang === "fa" ? `${toFa(p.mins)} ${t("blog.readTime")}` : `${p.mins} ${t("blog.readTime")}`;
+  document.getElementById("postMeta").textContent = `${p.emoji} · ${mins} · ${t("blog.byline")}`;
+  const fullText = p.body ? p.body[currentLang] : p.excerpt[currentLang];
+document.getElementById("postBody").innerHTML = `<p>${fullText.split("\n\n").join("</p><p>")}</p>`;
+  document.getElementById("postModal").classList.add("open");
+  document.body.style.overflow = "hidden";
+}
+function closePostModal() {
+  document.getElementById("postModal").classList.remove("open");
+  document.body.style.overflow = "";
+}
+
+/* ================= LANGUAGE ================= */
+function applyLanguage(lang) {
+  currentLang = lang;
+  document.documentElement.lang = lang;
+  document.documentElement.dir = lang === "fa" ? "rtl" : "ltr";
+  document.querySelectorAll("[data-i18n]").forEach((el) => { el.textContent = t(el.getAttribute("data-i18n")); });
+  document.querySelectorAll("[data-i18n-placeholder]").forEach((el) => { el.placeholder = t(el.getAttribute("data-i18n-placeholder")); });
+  document.querySelectorAll(".stat-value").forEach((el) => { el.textContent = lang === "fa" ? el.dataset.fa : el.dataset.en; });
+  document.getElementById("langShort").textContent = lang === "en" ? "FA" : "EN";
+    renderEquipment(); renderBlog(); renderFooterLists(); renderTimeline(); renderCompareSelects(); renderFact(); setupReveal();
+  try { localStorage.setItem("usmil-lang", lang); } catch (e) {}
+}
+
+/* ================= UI EVENTS ================= */
+document.getElementById("langToggle").addEventListener("click", () => applyLanguage(currentLang === "en" ? "fa" : "en"));
+const navMobile = document.getElementById("navMobile");
+document.getElementById("mobileBtn").addEventListener("click", () => {
+  const open = navMobile.classList.toggle("open");
+  document.getElementById("mobileIcon").setAttribute("d", open ? "M6 6l12 12M18 6L6 18" : "M4 6h16M4 12h16M4 18h16");
+});
+navMobile.addEventListener("click", (e) => {
+  if (e.target.tagName === "A") { navMobile.classList.remove("open"); document.getElementById("mobileIcon").setAttribute("d", "M4 6h16M4 12h16M4 18h16"); }
+});
+window.addEventListener("scroll", () => document.getElementById("header").classList.toggle("scrolled", window.scrollY > 20));
+document.addEventListener("click", (e) => {
+  const btn = e.target.closest(".readmore"); if (!btn) return;
+  const desc = btn.closest(".card-body").querySelector(".card-desc");
+  desc.classList.toggle("expanded");
+  btn.querySelector("span").textContent = desc.classList.contains("expanded") ? t("card.showLess") : t("card.readMore");
+});
+document.getElementById("newsForm").addEventListener("submit", (e) => {
+  e.preventDefault();
+  const btn = document.getElementById("newsletterBtn");
+  btn.textContent = t("newsletter.done"); e.target.reset();
+  setTimeout(() => { btn.textContent = t("newsletter.btn"); }, 2200);
+});
+function handleImgError(imgEl, id) {
+  const item = EQUIPMENT.find((e) => e.id === id);
+  if (item) imgEl.src = FABLESS(item);
+}
+document.getElementById("heroImg").addEventListener("error", function () { this.onerror = null; this.src = FABLESS(EQUIPMENT[0]); });
+
+/* =============================================================
+   3D BACKGROUND — ستاره‌های عمق‌دار + انفجار ذرات + پخش رنگ
+   ============================================================= */
+(function () {
+  const canvas = document.getElementById("bgCanvas");
+  const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const PALETTES = [
+    ["#fde68a","#f2c66d","#d9a441","#92610f"],   // طلایی
+    ["#fbbf24","#f97316","#ef4444","#fca5a5"],   // آتشین
+    ["#bfdbfe","#60a5fa","#3b82f6","#22d3ee"],   // آبی فولادی
+    ["#a7f3d0","#34d399","#22d3ee","#0e9488"],   // فیروزه‌ای
+    ["#ffffff","#fde68a","#f97316","#b91c1c"],   // انفجار سفید-قرمز
+  ];
+
+  /* ---------- فالبک ۲بعدی اگر Three.js لود نشد ---------- */
+  if (typeof THREE === "undefined") { fallback2D(); return; }
+
+  const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+  renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+  renderer.setSize(innerWidth, innerHeight);
+  renderer.setClearColor(0x000000, 0);
+
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(60, innerWidth / innerHeight, 0.1, 400);
+  camera.position.z = 60;
+
+  function makeTex(draw) {
+    const c = document.createElement("canvas"); c.width = c.height = 128;
+    draw(c.getContext("2d"));
+    return new THREE.CanvasTexture(c);
+  }
+  const glowTex = makeTex((ctx) => {
+    const g = ctx.createRadialGradient(64, 64, 0, 64, 64, 64);
+    g.addColorStop(0, "rgba(255,255,255,1)"); g.addColorStop(0.25, "rgba(255,255,255,0.55)"); g.addColorStop(1, "rgba(255,255,255,0)");
+    ctx.fillStyle = g; ctx.fillRect(0, 0, 128, 128);
+  });
+  const waveTex = makeTex((ctx) => {
+    ctx.shadowColor = "rgba(255,255,255,0.8)"; ctx.shadowBlur = 16;
+    ctx.strokeStyle = "rgba(255,255,255,0.9)"; ctx.lineWidth = 5;
+    ctx.beginPath(); ctx.arc(64, 64, 50, 0, Math.PI * 2); ctx.stroke();
+  });
+
+  /* ---- ستاره‌ها با عمق (حس ۳بعدی) ---- */
+  (function makeStars() {
+    const N = 1200, pos = new Float32Array(N * 3), col = new Float32Array(N * 3);
+    const c = new THREE.Color();
+    for (let i = 0; i < N; i++) {
+      pos[i * 3] = (Math.random() - 0.5) * 220;
+      pos[i * 3 + 1] = (Math.random() - 0.5) * 130;
+      pos[i * 3 + 2] = (Math.random() - 0.5) * 120 - 20;
+      const r = Math.random();
+      c.set(r < 0.68 ? "#9db8d9" : r < 0.86 ? "#f2c66d" : "#ffffff");
+      c.multiplyScalar(0.3 + Math.random() * 0.7);
+      col[i * 3] = c.r; col[i * 3 + 1] = c.g; col[i * 3 + 2] = c.b;
+    }
+    const g = new THREE.BufferGeometry();
+    g.setAttribute("position", new THREE.BufferAttribute(pos, 3));
+    g.setAttribute("color", new THREE.BufferAttribute(col, 3));
+    const m = new THREE.PointsMaterial({ size: 1.1, map: glowTex, transparent: true, opacity: 0.85, vertexColors: true, depthWrite: false, blending: THREE.AdditiveBlending, sizeAttenuation: true });
+    window.__stars = new THREE.Points(g, m); scene.add(window.__stars);
+  })();
+
+  const bursts = [], waves = [];
+
+  /* ---- انفجار: ذرات + موج ضربه + هاله پخش‌شونده رنگ ---- */
+  function spawnBurst() {
+    const pal = PALETTES[(Math.random() * PALETTES.length) | 0];
+    const px = (Math.random() - 0.5) * 90, py = (Math.random() - 0.5) * 46, pz = (Math.random() - 0.5) * 40;
+    const N = 380 + ((Math.random() * 160) | 0);
+    const pos = new Float32Array(N * 3), col = new Float32Array(N * 3), vel = new Float32Array(N * 3);
+    const c = new THREE.Color(), w = new THREE.Color("#ffffff");
+    for (let i = 0; i < N; i++) {
+      pos[i * 3] = px; pos[i * 3 + 1] = py; pos[i * 3 + 2] = pz;
+      const u = Math.random() * 2 - 1, a = Math.random() * Math.PI * 2, s = Math.sqrt(1 - u * u);
+      const sp = 4 + Math.pow(Math.random(), 1.6) * 26;
+      vel[i * 3] = Math.cos(a) * s * sp; vel[i * 3 + 1] = u * sp * 0.8; vel[i * 3 + 2] = Math.sin(a) * s * sp;
+      c.set(pal[(Math.random() * pal.length) | 0]);
+      if (Math.random() < 0.25) c.lerp(w, 0.55);
+      col[i * 3] = c.r; col[i * 3 + 1] = c.g; col[i * 3 + 2] = c.b;
+    }
+    const g = new THREE.BufferGeometry();
+    g.setAttribute("position", new THREE.BufferAttribute(pos, 3));
+    g.setAttribute("color", new THREE.BufferAttribute(col, 3));
+    const m = new THREE.PointsMaterial({ size: 1.5, map: glowTex, transparent: true, opacity: 1, vertexColors: true, depthWrite: false, blending: THREE.AdditiveBlending, sizeAttenuation: true });
+    const pts = new THREE.Points(g, m); scene.add(pts);
+    bursts.push({ pts, vel, age: 0, life: 2.8 + Math.random() * 1.2 });
+
+    // هاله رنگی بزرگ که آرام «پخش» می‌شود
+    const glow = new THREE.Sprite(new THREE.SpriteMaterial({ map: glowTex, color: pal[1], transparent: true, opacity: 0.26, depthWrite: false, blending: THREE.AdditiveBlending }));
+    glow.position.set(px, py, pz); glow.scale.setScalar(6); scene.add(glow);
+    waves.push({ spr: glow, age: 0, life: 3.6, from: 6, to: 55, o0: 0.26 });
+
+    // موج ضربه
+    const ring = new THREE.Sprite(new THREE.SpriteMaterial({ map: waveTex, color: pal[0], transparent: true, opacity: 0.5, depthWrite: false, blending: THREE.AdditiveBlending }));
+    ring.position.set(px, py, pz); scene.add(ring);
+    waves.push({ spr: ring, age: 0, life: 1.5, from: 2, to: 28, o0: 0.5 });
+  }
+
+  let mx = 0, my = 0;
+  addEventListener("pointermove", (e) => { mx = e.clientX / innerWidth - 0.5; my = -(e.clientY / innerHeight - 0.5); });
+  addEventListener("resize", () => { camera.aspect = innerWidth / innerHeight; camera.updateProjectionMatrix(); renderer.setSize(innerWidth, innerHeight); });
+
+  const clock = new THREE.Clock();
+  let nextBurst = 0.7;
+  (function loop() {
+    requestAnimationFrame(loop);
+    const dt = Math.min(clock.getDelta(), 0.05);
+    if (window.__stars) window.__stars.rotation.y += dt * 0.008;
+    camera.position.x += (mx * 8 - camera.position.x) * 0.04;
+    camera.position.y += (my * 5 - camera.position.y) * 0.04;
+    camera.lookAt(0, 0, 0);
+
+    for (let i = bursts.length - 1; i >= 0; i--) {
+      const b = bursts[i]; b.age += dt; const p = b.age / b.life;
+      if (p >= 1) { scene.remove(b.pts); b.pts.geometry.dispose(); b.pts.material.dispose(); bursts.splice(i, 1); continue; }
+      const pa = b.pts.geometry.attributes.position;
+      for (let j = 0; j < pa.count; j++) {
+        const k = j * 3;
+        b.vel[k] *= 0.986; b.vel[k + 1] *= 0.986; b.vel[k + 2] *= 0.986;
+        pa.array[k] += b.vel[k] * dt; pa.array[k + 1] += b.vel[k + 1] * dt; pa.array[k + 2] += b.vel[k + 2] * dt;
+      }
+      pa.needsUpdate = true;
+      b.pts.material.opacity = 1 - p * p;
+      b.pts.material.size = 1.5 * (1 - p * 0.5);
+    }
+    for (let i = waves.length - 1; i >= 0; i--) {
+      const wv = waves[i]; wv.age += dt; const p = wv.age / wv.life;
+      if (p >= 1) { scene.remove(wv.spr); wv.spr.material.dispose(); waves.splice(i, 1); continue; }
+      const e = 1 - Math.pow(1 - p, 3);
+      wv.spr.scale.setScalar(wv.from + (wv.to - wv.from) * e);
+      wv.spr.material.opacity = wv.o0 * (1 - p);
+    }
+    if (!reduced) { nextBurst -= dt; if (nextBurst <= 0) { spawnBurst(); nextBurst = 1.7 + Math.random() * 2.4; } }
+    renderer.render(scene, camera);
+  })();
+
+  /* ---------- فالبک Canvas 2D ---------- */
+  function fallback2D() {
+    const ctx = canvas.getContext("2d");
+    let W, H;
+    const resize = () => { W = canvas.width = innerWidth; H = canvas.height = innerHeight; };
+    resize(); addEventListener("resize", resize);
+    const stars = Array.from({ length: 220 }, () => ({ x: Math.random(), y: Math.random(), r: Math.random() * 1.4 + 0.3, tw: Math.random() * 6.28 }));
+    const parts = []; let next = 0.8, last = performance.now();
+    function boom() {
+      const pal = PALETTES[(Math.random() * PALETTES.length) | 0];
+      const x = Math.random() * W, y = Math.random() * H * 0.9;
+      for (let i = 0; i < 190; i++) {
+        const a = Math.random() * 6.283, sp = 0.4 + Math.pow(Math.random(), 1.5) * 5;
+        parts.push({ x, y, vx: Math.cos(a) * sp, vy: Math.sin(a) * sp, l: 1, c: pal[(Math.random() * pal.length) | 0], r: 1 + Math.random() * 2.4 });
+      }
+      parts.push({ wave: true, x, y, l: 1, c: pal[0] });
+    }
+    (function frame(now) {
+      requestAnimationFrame(frame);
+      const dt = Math.min((now - last) / 1000, 0.05); last = now;
+      ctx.clearRect(0, 0, W, H);
+      for (const s of stars) {
+        s.tw += dt; ctx.globalAlpha = 0.22 + 0.22 * Math.sin(s.tw * 1.5);
+        ctx.fillStyle = "#9db8d9"; ctx.beginPath(); ctx.arc(s.x * W, s.y * H, s.r, 0, 6.283); ctx.fill();
+      }
+      ctx.globalCompositeOperation = "lighter";
+      next -= dt; if (next <= 0 && !reduced) { boom(); next = 1.8 + Math.random() * 2.2; }
+      for (let i = parts.length - 1; i >= 0; i--) {
+        const p = parts[i]; p.l -= dt / (p.wave ? 1.4 : 2.6);
+        if (p.l <= 0) { parts.splice(i, 1); continue; }
+        if (p.wave) {
+          const e = 1 - Math.pow(1 - p.l, 3);
+          ctx.globalAlpha = 0.35 * p.l; ctx.strokeStyle = p.c; ctx.lineWidth = 2;
+          ctx.beginPath(); ctx.arc(p.x, p.y, e * 230, 0, 6.283); ctx.stroke(); continue;
+        }
+        p.vx *= 0.985; p.vy *= 0.985; p.x += p.vx * 60 * dt; p.y += p.vy * 60 * dt;
+        ctx.globalAlpha = Math.max(p.l, 0); ctx.fillStyle = p.c;
+        ctx.beginPath(); ctx.arc(p.x, p.y, p.r * (0.5 + p.l), 0, 6.283); ctx.fill();
+      }
+      ctx.globalCompositeOperation = "source-over"; ctx.globalAlpha = 1;
+    })(performance.now());
+  }
+})();
+
+/* ================= SCROLL REVEAL ================= */
+const io = new IntersectionObserver((entries) => {
+  entries.forEach((en) => {
+    if (en.isIntersecting) { en.target.classList.add("visible"); io.unobserve(en.target); }
+  });
+}, { threshold: 0.12 });
+function setupReveal() {
+  document.querySelectorAll(".card, .blog-featured, .blog-side-item, .timeline-item, .fact-strip, .compare-box").forEach((el) => {
+    if (el.classList.contains("reveal")) return;
+    el.classList.add("reveal");
+    const sibs = Array.from(el.parentElement.children).indexOf(el);
+    el.style.transitionDelay = (sibs % 3) * 0.07 + "s";
+    io.observe(el);
+  });
+}
+
+/* ================= COUNTERS ================= */
+function animateCounters() {
+  document.querySelectorAll(".stat-value").forEach((el) => {
+    const num = parseFloat(el.dataset.num || "0");
+    const suffix = currentLang === "fa" ? (el.dataset.suffixFa || "") : (el.dataset.suffixEn || "");
+    const dur = 1400, t0 = performance.now();
+    const fmt = (v) => currentLang === "fa" ? Math.round(v).toLocaleString("fa-IR") : Math.round(v).toLocaleString("en-US");
+    (function tick(now) {
+      const p = Math.min(((now || performance.now()) - t0) / dur, 1);
+      const e = 1 - Math.pow(1 - p, 3);
+      el.textContent = fmt(num * e) + suffix;
+      if (p < 1) requestAnimationFrame(tick);
+    })(performance.now());
+  });
+}
+
+/* ================= EVENTS ================= */
+const progressBar = document.getElementById("progressBar");
+const toTopBtn = document.getElementById("toTop");
+window.addEventListener("scroll", () => {
+  const h = document.documentElement;
+  progressBar.style.width = (h.scrollTop / (h.scrollHeight - h.clientHeight) * 100) + "%";
+  toTopBtn.classList.toggle("show", window.scrollY > 600);
+});
+toTopBtn.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
+
+document.getElementById("postClose").addEventListener("click", closePostModal);
+document.getElementById("postModal").addEventListener("click", (e) => { if (e.target.id === "postModal") closePostModal(); });
+document.getElementById("imgLightbox").addEventListener("click", () => {
+  document.getElementById("imgLightbox").classList.remove("open");
+  document.body.style.overflow = "";
+});
+document.getElementById("cmpBtn").addEventListener("click", doCompare);
+document.getElementById("blogGrid").addEventListener("click", (e) => {
+  const it = e.target.closest("[data-post]");
+  if (it) openPost(+it.dataset.post);
+});
+document.addEventListener("click", (e) => {
+  const z = e.target.closest("img.zoomable");
+  if (!z) return;
+  document.getElementById("lightboxImg").src = z.src;
+  document.getElementById("imgLightbox").classList.add("open");
+  document.body.style.overflow = "hidden";
+});
+document.addEventListener("keydown", (e) => {
+  if (e.key !== "Escape") return;
+  document.getElementById("postModal").classList.remove("open");
+  document.getElementById("imgLightbox").classList.remove("open");
+  document.body.style.overflow = "";
+});
+
+/* ================= INIT ================= */
+let saved = null;
+try { saved = localStorage.getItem("usmil-lang"); } catch (e) {}
+showFact();
+applyLanguage(saved === "fa" ? "fa" : "en");
+animateCounters();
+setupReveal();
+</script>
+</body>
+</html>
